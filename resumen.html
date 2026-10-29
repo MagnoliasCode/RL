@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="h-full" data-kt-theme="true" data-kt-theme-mode="light" lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Resumen y hallazgos — Conglomerado RL Chihuahua</title>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<meta name="description" content="Hallazgos del Conglomerado RL y contexto electoral 2024 por distrito.">
+<meta name="robots" content="noindex, nofollow">
+<link href="assets/media/app/favicon.ico" rel="shortcut icon">
+
+<link href="assets/css/styles.css" rel="stylesheet">
+<link href="assets/css/app.css" rel="stylesheet">
+<!-- Tema visual: va al final para tener prioridad -->
+<link href="assets/css/tema.css" rel="stylesheet">
+</head>
+<body class="antialiased flex h-full text-base text-foreground bg-background demo1 kt-sidebar-fixed kt-header-fixed">
+<script>
+  document.documentElement.classList.add('light');
+</script>
+
+<div class="flex grow" id="app_wrapper">
+  <!-- Sidebar -->
+  <div class="kt-sidebar fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
+    <div class="kt-sidebar-header hidden lg:flex relative shrink-0" id="sidebar_header">
+      <a class="vw-logo-block" href="index.html" title="Vernier — Consultoría Global y Estudios de Opinión">
+        <img src="assets/media/brand/vernier-logo-white.png" alt="Vernier">
+      </a>
+      <div class="vw-sidebar-code">
+        <span><span class="vw-dot"></span><span class="vw-label">CUU // Conglomerado RL</span></span>
+        <span class="vw-label">DL 12–18</span>
+      </div>
+      <button class="kt-btn kt-btn-icon size-[30px] absolute start-full z-40 -translate-x-2/4 -translate-y-2/4" data-kt-toggle="body" data-kt-toggle-class="kt-sidebar-collapse" id="sidebar_toggle" title="Contraer/expandir menú">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+    </div>
+    <div class="kt-sidebar-content flex grow shrink-0 py-5 pe-2" id="sidebar_content">
+      <div class="kt-scrollable-y-hover grow shrink-0 flex ps-2 lg:ps-5 pe-1 lg:pe-3" data-kt-scrollable="true" data-kt-scrollable-dependencies="#sidebar_header" data-kt-scrollable-height="auto" data-kt-scrollable-offset="0px" data-kt-scrollable-wrappers="#sidebar_content" id="sidebar_scrollable">
+        <div class="kt-menu flex flex-col grow" data-kt-menu="true" id="sidebar_menu">
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="index.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">radar</span></span>
+              <span class="kt-menu-title">Mapa interactivo</span>
+              <span class="vw-nav-num">01</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="dashboard.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">query_stats</span></span>
+              <span class="kt-menu-title">Dashboard KPIs</span>
+              <span class="vw-nav-num">02</span>
+            </a>
+          </div>
+          <div class="kt-menu-item active">
+            <a class="kt-menu-link items-center grow" href="resumen.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">menu_book</span></span>
+              <span class="kt-menu-title">Resumen y hallazgos</span>
+              <span class="vw-nav-num">03</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="migracion.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">swap_horiz</span></span>
+              <span class="kt-menu-title">Migración de opinión</span>
+              <span class="vw-nav-num">04</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="analisis.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">dashboard_customize</span></span>
+              <span class="kt-menu-title">Análisis manual</span>
+              <span class="vw-nav-num">05</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vw-sidebar-foot shrink-0">
+      <div class="vw-row"><span class="vw-label">Vernier // Estudios de opinión</span><span class="material-symbols-outlined vw-ico-16">tune</span></div>
+    </div>
+  </div>
+  <!-- End of Sidebar -->
+
+  <!-- Wrapper -->
+  <div class="kt-wrapper flex grow flex-col">
+    <!-- Header -->
+    <header class="kt-header fixed top-0 z-10 start-0 end-0 flex items-stretch shrink-0" data-kt-sticky="true" data-kt-sticky-name="header" id="header">
+      <div class="kt-container-fixed flex justify-between items-stretch gap-3 lg:gap-4" id="headerContainer">
+        <div class="flex gap-2.5 lg:hidden items-center -ms-1">
+          <button class="kt-btn kt-btn-icon kt-btn-ghost" data-kt-drawer-toggle="#sidebar">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+        <div class="vw-topbar-title grow">
+          <h2>/Resumen y hallazgos</h2>
+          <span class="vw-label">Municipio de Chihuahua • Conglomerado RL</span>
+        </div>
+        <div class="flex items-center gap-2.5"></div>
+      </div>
+    </header>
+    <!-- End of Header -->
+
+    <!-- Content -->
+    <main class="grow pt-6 pb-8 vw-has-etching" id="content" role="content">
+      <!-- Grabado HUD de fondo (decorativo) -->
+      <div class="vw-etching" aria-hidden="true">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1"><circle cx="600" cy="400" r="380" stroke-dasharray="4 8"/><circle cx="600" cy="400" r="260"/><circle cx="600" cy="400" r="140" stroke-dasharray="2 6"/><line stroke-width=".8" x1="0" x2="1200" y1="400" y2="400"/><line stroke-width=".8" x1="600" x2="600" y1="0" y2="800"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="360" y2="360"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="440" y2="440"/><circle cx="280" cy="220" fill="currentColor" fill-opacity=".3" r="8"/><circle cx="920" cy="580" fill="currentColor" fill-opacity=".3" r="8"/></svg>
+      </div>
+
+      <div class="kt-container-fixed">
+        <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+          <div class="vw-section-head">
+            <div class="vw-eyebrow"><span class="vw-dot"></span><span class="vw-label">Informe // Hallazgos</span></div>
+            <h1>/Resumen y hallazgos</h1>
+            <p>Lo más importante del Conglomerado RL y su contexto electoral en el municipio de Chihuahua.</p>
+          </div>
+          <div class="cg-pagina-panel w-full lg:w-auto" id="cg_panel"></div>
+        </div>
+      </div>
+
+      <div class="kt-container-fixed" id="r_contenido" hidden>
+        <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-start">
+          <div class="lg:col-span-2">
+            <div class="kt-card">
+              <div class="kt-card-content p-7.5">
+                <article class="vw-article flex flex-col gap-6 text-sm leading-6.5 text-foreground" id="narrativa"></article>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-1">
+            <div class="kt-card vw-pod">
+              <div class="kt-card-header">
+                <h3 class="kt-card-title">Datos clave</h3>
+                <span class="vw-label">Conglomerado // RL</span>
+              </div>
+              <div class="kt-card-content flex flex-col gap-2 p-5" id="datos_clave"></div>
+              <div class="kt-card-footer flex flex-col gap-2">
+                <a class="kt-btn kt-btn-outline w-full" href="migracion.html">Ver migración de opinión</a>
+                <a class="kt-btn kt-btn-primary w-full" href="index.html">Ver mapa interactivo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kt-container-fixed pt-8">
+        <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+          <div class="vw-section-head">
+            <div class="vw-eyebrow"><span class="vw-dot"></span><span class="vw-label">Contexto // Elección 2024</span></div>
+            <h1>/Resultados 2024 por distrito</h1>
+            <p id="contexto_2024"></p>
+          </div>
+        </div>
+        <div class="kt-card">
+          <div class="kt-card-content vw-scroll-x">
+            <table class="vw-tabla" id="t_2024">
+              <thead><tr><th>Ámbito</th><th class="num">Secciones</th><th class="num">Lista nominal</th><th class="num">Participación</th><th class="num">COAL PAN-PRI-PRD</th><th class="num">COAL MORENA-PT</th><th class="num">MC</th><th class="num">Secciones ganadas (PAN-PRI-PRD / MORENA-PT)</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            <p class="vw-nota-metodo mt-3">Porcentajes sobre la votación total de cada ámbito. Debajo de cada coalición, la parte que obtuvo cada partido. Fuente: capa de secciones mCUU1624 (resultados 2016–2024).</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- End of Content -->
+  </div>
+  <!-- End of Wrapper -->
+</div>
+
+<script src="assets/js/core.bundle.js"></script>
+<script src="assets/vendors/ktui/ktui.min.js"></script>
+<script src="datos/mCUU1624.js"></script>
+<script src="datos/conglomerado-rl.js"></script>
+<script src="app.js"></script>
+<script src="conglomerado.js"></script>
+<script src="resumen.js"></script>
+</body>
+</html>

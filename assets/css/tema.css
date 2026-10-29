@@ -1,0 +1,997 @@
+/* Tema visual del proyecto.
+   Se carga DESPUES de assets/css/styles.css (Metronic/KTUI). Solo cambia apariencia:
+   reasigna las variables de Metronic a los tokens del tema y reviste los
+   componentes (sidebar, header, tarjetas, botones, tablas, popups) con su gramatica:
+   lienzo ceramico, pods de pizarra, acento oxido, pildoras y etiquetas en mayusculas.
+   Las reglas van fuera de @layer para tener prioridad sobre los estilos de Metronic. */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap");
+
+/* ---------- Tokens (tokens del tema) ---------- */
+:root {
+  --vw-ink-950: #061e28;
+  --vw-ink-900: #0b232d;
+  --vw-ink-800: #223843;
+  --vw-ink-700: #344a55;
+  --vw-ink-600: #4b616d;
+  --vw-ink-400: #8aa1ae;
+  --vw-ink-300: #b3cad8;
+  --vw-ink-200: #cee6f4;
+  --vw-rust-900: #3a0b00;
+  --vw-rust-800: #6a1b00;
+  --vw-rust-700: #852400;
+  --vw-rust-600: #a83911;
+  --vw-rust-400: #ff784d;
+  --vw-rust-300: #ffb59e;
+  --vw-rust-100: #ffdbd0;
+  --vw-amber-800: #493000;
+  --vw-amber-600: #cf921c;
+  --vw-amber-400: #fdba45;
+  --vw-amber-200: #ffdeae;
+  --vw-ceramic-0: #ffffff;
+  --vw-ceramic-50: #fdf9ef;
+  --vw-ceramic-100: #f7f3e9;
+  --vw-ceramic-200: #f1eee4;
+  --vw-ceramic-300: #ebe8de;
+  --vw-ceramic-400: #e5e2d8;
+  --vw-ceramic-500: #dddad0;
+  --vw-carbon-900: #1c1c16;
+  --vw-carbon-600: #42474b;
+  --vw-carbon-500: #73787b;
+  --vw-carbon-300: #c2c7cb;
+  --vw-error-600: #ba1a1a;
+  --vw-status-ok: #059669;
+
+  --surface-page: var(--vw-ceramic-50);
+  --surface-card: var(--vw-ceramic-200);
+  --surface-card-low: var(--vw-ceramic-100);
+  --surface-card-high: var(--vw-ceramic-300);
+  --surface-raised: var(--vw-ceramic-0);
+  --surface-pod: var(--vw-ink-800);
+  --surface-pod-deep: var(--vw-ink-900);
+  --surface-scrim: rgba(11, 35, 45, .7);
+  --text-strong: var(--vw-ink-900);
+  --text-body: var(--vw-carbon-900);
+  --text-muted: var(--vw-carbon-600);
+  --text-accent: var(--vw-rust-600);
+  --text-on-dark: #ffffff;
+  --text-on-dark-muted: var(--vw-ink-400);
+  --text-accent-on-dark: var(--vw-rust-400);
+  --border-on-dark: rgba(179, 202, 216, .2);
+
+  --radius-xs: .125rem;
+  --radius-sm: .25rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
+
+  --shadow-chrome: 0 1px 8px rgba(0, 0, 0, .04);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, .05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, .1), 0 2px 4px -2px rgba(0, 0, 0, .1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
+  --shadow-nav-active: 0 4px 12px rgba(11, 35, 45, .15);
+  --shadow-modal: 0 12px 32px rgba(17, 28, 34, .25);
+  --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, .05);
+
+  --font-display: "Roboto", system-ui, sans-serif;
+  --font-body: "Roboto", system-ui, sans-serif;
+  --font-brand: "Vesper Libre", Georgia, serif;
+  --font-icon: "Material Symbols Outlined";
+  --ease-std: cubic-bezier(.4, 0, .2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+
+  /* ---------- Variables de Metronic reasignadas al tema ---------- */
+  --font-sans: var(--font-body);
+  --background: var(--surface-page);
+  --foreground: var(--text-body);
+  --card: var(--surface-card);
+  --card-foreground: var(--text-body);
+  --popover: var(--surface-raised);
+  --popover-foreground: var(--text-body);
+  --primary: var(--vw-rust-600);
+  --primary-foreground: #ffffff;
+  --secondary: var(--vw-ceramic-300);
+  --secondary-foreground: var(--text-muted);
+  --muted: var(--vw-ceramic-300);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--vw-ceramic-300);
+  --accent-foreground: var(--vw-carbon-900);
+  --destructive: var(--vw-error-600);
+  --mono: var(--text-strong);
+  --mono-foreground: #ffffff;
+  --border: var(--vw-ceramic-400);
+  --input: var(--vw-ceramic-400);
+  --ring: var(--vw-rust-600);
+  --radius: 1rem;
+}
+
+/* Shell: sidebar de 288px y top bar de 64px */
+.demo1 {
+  --sidebar-width: 288px;
+  --sidebar-default-width: 288px;
+  --sidebar-width-collapse: 88px;
+  --header-height: 64px;
+}
+@media (max-width: 64rem) {
+  .demo1 { --header-height: 64px; }
+}
+/* Al contraer, el ancho pasa al de colapso (la regla de arriba, sin capa, anularia la de Metronic) */
+@media (min-width: 64rem) {
+  .demo1.kt-sidebar-collapse { --sidebar-width: var(--sidebar-width-collapse); }
+}
+
+/* ---------- Base ---------- */
+html, body {
+  font-family: var(--font-body);
+  background: var(--surface-page);
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--vw-rust-100); color: var(--vw-rust-900); }
+
+.material-symbols-outlined {
+  font-family: var(--font-icon);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  font-feature-settings: "liga";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-size: 20px;
+  vertical-align: middle;
+}
+.vw-ico-16 { font-size: 16px; }
+.vw-ico-18 { font-size: 18px; }
+
+@keyframes vwPulse { 0%, 100% { opacity: 1 } 50% { opacity: .45 } }
+
+/* Etiquetas HUD reutilizables */
+.vw-label {
+  font-family: var(--font-display);
+  font-size: 10px; line-height: 14px; letter-spacing: .1em; font-weight: 700;
+  text-transform: uppercase;
+}
+.vw-label-md {
+  font-family: var(--font-display);
+  font-size: 12px; line-height: 16px; letter-spacing: .08em; font-weight: 600;
+  text-transform: uppercase;
+}
+.vw-dot { width: 8px; height: 8px; border-radius: 99px; background: var(--vw-rust-600); display: inline-block; flex-shrink: 0; }
+.vw-dot-live { animation: vwPulse 2s var(--ease-std) infinite; }
+
+/* Numeros: Roboto tabular en negritas, un paso mas grande que el texto que los rodea */
+.num, .num-total {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  letter-spacing: .02em;
+}
+.num-total { font-weight: 700; color: var(--text-strong); }
+
+/* ---------- Sidebar ---------- */
+.kt-sidebar {
+  background: var(--vw-ceramic-200);
+  border-inline-end: 0;
+  box-shadow: var(--shadow-chrome);
+}
+/* KTUI retira top-0/bottom-0 del sidebar en escritorio; se fija a toda la altura de la ventana */
+@media (min-width: 64rem) {
+  .demo1 .kt-sidebar { top: 0; bottom: 0; }
+}
+.demo1 .kt-sidebar .kt-sidebar-header {
+  height: auto;
+  padding: 24px 24px 8px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+}
+.demo1 .kt-sidebar .kt-sidebar-logo { width: auto; }
+.vw-logo-block {
+  background: var(--vw-ink-900);
+  border-radius: var(--radius-lg);
+  height: 96px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  text-decoration: none;
+}
+.vw-logo-block img { height: 84px; display: block; }
+.vw-sidebar-code {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 8px; color: var(--text-muted);
+}
+.vw-sidebar-code > span:first-child { display: flex; align-items: center; gap: 8px; }
+#sidebar_toggle {
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--vw-ceramic-0);
+  box-shadow: var(--shadow-md);
+  color: var(--text-strong);
+  top: 48px;
+}
+#sidebar_toggle:hover { background: var(--vw-ink-900); color: #fff; }
+#sidebar_toggle .material-symbols-outlined { font-size: 18px; transition: transform .3s var(--ease-std); }
+.kt-sidebar-collapse #sidebar_toggle .material-symbols-outlined { transform: rotate(180deg); }
+
+.kt-sidebar .kt-menu { gap: 4px; }
+.kt-sidebar .kt-menu-link {
+  border: 0 !important;
+  border-radius: var(--radius-full) !important;
+  padding: 10px 16px !important;
+  gap: 10px !important;
+  color: var(--text-muted);
+  transition: background var(--dur-fast), color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.kt-sidebar .kt-menu-link:hover { background: var(--vw-ceramic-300) !important; }
+.kt-sidebar .kt-menu-link:hover .kt-menu-title { color: var(--vw-carbon-900); }
+.kt-sidebar .kt-menu-icon { color: inherit; width: 20px; }
+.kt-sidebar .kt-menu-icon .material-symbols-outlined { font-size: 18px; }
+.kt-sidebar .kt-menu-title {
+  font-family: var(--font-display);
+  font-size: 12px; line-height: 16px; letter-spacing: .08em; font-weight: 600 !important;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-grow: 1;
+}
+.kt-sidebar .vw-nav-num {
+  font-size: 10px; letter-spacing: .1em; font-weight: 700; color: var(--text-muted);
+}
+.kt-sidebar .kt-menu-item.active > .kt-menu-link {
+  background: var(--vw-ink-900) !important;
+  box-shadow: var(--shadow-nav-active);
+}
+.kt-sidebar .kt-menu-item.active > .kt-menu-link,
+.kt-sidebar .kt-menu-item.active > .kt-menu-link .kt-menu-title,
+.kt-sidebar .kt-menu-item.active > .kt-menu-link .kt-menu-icon { color: #fff !important; }
+.kt-sidebar .kt-menu-item.active > .kt-menu-link .vw-nav-num { color: var(--vw-ink-400); }
+
+.vw-sidebar-foot {
+  padding: 16px 32px 24px;
+  display: flex; flex-direction: column; gap: 8px;
+  color: var(--text-muted);
+}
+.vw-sidebar-foot .vw-row { display: flex; justify-content: space-between; align-items: center; }
+.vw-brand-line { font-family: var(--font-brand); font-size: 15px; color: var(--text-strong); letter-spacing: .01em; }
+
+/* Sidebar contraido: se reduce el bloque de logo y se ocultan textos */
+@media (min-width: 64rem) {
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-sidebar-header { padding: 24px 12px 8px; }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .vw-logo-block { height: 56px; border-radius: var(--radius-md); }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .vw-logo-block img { height: 44px; }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) #sidebar_content { padding-inline: 0; }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) #sidebar_scrollable { padding-inline: 16px; }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu-link {
+    justify-content: center;
+    padding: 12px 0 !important;
+  }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu-icon { justify-content: center; margin: 0; }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .kt-menu-title { display: none; }
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .vw-sidebar-code,
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .vw-nav-num,
+  .demo1.kt-sidebar-collapse .kt-sidebar:not(:hover) .vw-sidebar-foot { display: none; }
+}
+
+/* ---------- Top bar ---------- */
+.kt-header {
+  background: rgba(253, 249, 239, .85) !important;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-chrome);
+  border-bottom: 0 !important;
+}
+.vw-topbar-title { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; }
+.vw-topbar-title h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px; line-height: 26px; letter-spacing: .04em; font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.vw-topbar-title .vw-label { color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vw-counter {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border-radius: var(--radius-full);
+  background: var(--vw-ceramic-0);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-display);
+  font-size: 12px; letter-spacing: .08em; font-weight: 700; text-transform: uppercase;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.vw-counter .vw-counter-status { color: var(--vw-rust-600); font-size: 10px; letter-spacing: .1em; }
+
+/* ---------- Encabezados de seccion: /SLASH TITLE ---------- */
+.vw-section-head { display: flex; flex-direction: column; gap: 6px; }
+.vw-eyebrow { display: flex; align-items: center; gap: 6px; color: var(--vw-rust-600); }
+.vw-section-head h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 30px; line-height: 36px; letter-spacing: .05em; font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+@media (max-width: 40rem) {
+  .vw-section-head h1 { font-size: 22px; line-height: 28px; letter-spacing: .04em; }
+}
+.vw-section-head p { margin: 0; font-size: 14px; line-height: 20px; color: var(--text-muted); max-width: 720px; }
+.vw-rule { height: 1px; background: var(--vw-carbon-300); border: 0; margin: 4px 0 0; opacity: .7; }
+
+/* Grabado HUD de fondo (anillos concentricos y miras al 20%) */
+.vw-etching {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .2;
+  color: var(--vw-carbon-500);
+}
+.vw-etching svg { width: 100%; height: 100%; }
+.vw-has-etching > * { position: relative; z-index: 1; }
+.vw-has-etching > .vw-etching { position: fixed; z-index: 0; }
+
+/* ---------- Tarjetas ---------- */
+.kt-card {
+  background: var(--surface-card);
+  border: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-body);
+  overflow: visible;
+}
+.kt-card-header {
+  border-bottom: 0;
+  padding-top: 20px;
+  min-height: 0;
+}
+.kt-card-title {
+  font-family: var(--font-display);
+  font-size: 16px; line-height: 22px; letter-spacing: .03em; font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+.kt-card-footer { border-top: 1px solid var(--border); }
+
+/* Fila de KPIs: tarjetas separadas, la ultima invertida en pod oscuro */
+.kt-card:has(> .kpi-row) { background: transparent; box-shadow: none; }
+.kpi-row { gap: 16px; }
+.kpi-row > div {
+  position: relative; overflow: hidden;
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 0 !important;
+  min-height: 132px;
+  justify-content: space-between;
+}
+.kpi-row > div::after {
+  content: ""; position: absolute; right: -16px; bottom: -16px;
+  width: 80px; height: 80px; border-radius: 99px;
+  background: var(--vw-ceramic-400); opacity: .4; pointer-events: none;
+}
+.kpi-row > div > span:first-child {
+  font-family: var(--font-display);
+  font-size: 10px; line-height: 14px; letter-spacing: .1em; font-weight: 700 !important;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.kpi-row > div > span:nth-child(2) {
+  position: relative; z-index: 1;
+  font-family: var(--font-display);
+  font-size: 30px; line-height: 36px; font-weight: 700 !important; letter-spacing: -.02em;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.kpi-row > div > span:nth-child(3) {
+  position: relative; z-index: 1;
+  font-family: var(--font-display);
+  font-size: 12px; line-height: 16px; letter-spacing: .08em; font-weight: 700;
+  text-transform: uppercase; color: var(--vw-rust-600);
+}
+.kpi-row > div:last-child { background: var(--vw-ink-900); box-shadow: var(--shadow-md); }
+.kpi-row > div:last-child::after { background: var(--vw-ink-800); opacity: .6; width: 96px; height: 96px; right: -24px; bottom: -24px; }
+.kpi-row > div:last-child > span:first-child { color: var(--vw-ink-400); }
+.kpi-row > div:last-child > span:nth-child(2) { color: #fff; }
+@media (min-width: 1024px) {
+  .kpi-row > div { border-inline-end: 0 !important; }
+}
+
+/* ---------- Botones ---------- */
+.kt-btn {
+  border-radius: var(--radius-full) !important;
+  font-family: var(--font-display);
+  font-size: 12px; letter-spacing: .08em; font-weight: 600;
+  text-transform: uppercase;
+  transition: background var(--dur-fast) var(--ease-std), color var(--dur-fast) var(--ease-std), box-shadow var(--dur-fast);
+}
+.kt-btn-primary {
+  background: var(--vw-ink-900);
+  color: #fff;
+  border: 0;
+  box-shadow: var(--shadow-sm);
+}
+.kt-btn-primary:hover { background: var(--vw-rust-600); color: #fff; }
+.kt-btn-outline {
+  background: var(--vw-ceramic-300);
+  border: 0;
+  color: var(--text-muted);
+  box-shadow: none;
+}
+.kt-btn-outline:hover { background: var(--vw-ceramic-500); color: var(--vw-carbon-900); }
+.kt-btn-outline i, .kt-btn-outline .material-symbols-outlined { color: inherit; }
+.kt-btn-ghost { color: var(--text-strong); }
+.kt-btn-ghost:hover { background: var(--vw-ceramic-300); }
+.kt-btn-icon { border-radius: var(--radius-full) !important; }
+
+/* Slicer HUD del mapa (Distrito Local / Capas) */
+.hud-btn {
+  background: var(--vw-ceramic-300) !important;
+  border: 0 !important;
+  color: var(--text-muted) !important;
+}
+.hud-btn:hover { background: var(--vw-ceramic-500) !important; color: var(--vw-carbon-900) !important; }
+.hud-btn.hud-btn-activo {
+  background: var(--vw-rust-600) !important;
+  color: #fff !important;
+  box-shadow: var(--shadow-md);
+}
+.hud-btn.hud-btn-activo:hover { background: var(--vw-rust-400) !important; color: var(--vw-rust-800) !important; }
+.vw-hud-label { color: var(--text-muted); margin-inline-end: 4px; white-space: nowrap; }
+
+/* ---------- Badges y enlaces ---------- */
+.kt-badge {
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  letter-spacing: .06em; font-weight: 700;
+  text-transform: uppercase;
+}
+.kt-badge-primary, .kt-badge-primary.kt-badge-outline {
+  background: var(--vw-rust-100);
+  color: var(--vw-rust-900);
+  border: 0;
+}
+.kt-link, article a {
+  color: var(--vw-rust-600);
+  font-weight: 600;
+  text-decoration: none;
+}
+.kt-link:hover, article a:hover { color: var(--vw-rust-700); text-decoration: underline; }
+
+/* ---------- Formularios ---------- */
+.kt-select {
+  border: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--vw-ceramic-0);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-strong);
+  font-weight: 600;
+  padding-inline: 16px;
+}
+.kt-select:focus { box-shadow: 0 0 0 2px var(--vw-rust-600); outline: none; }
+.kt-checkbox {
+  border-radius: 99px;
+  border-color: var(--vw-carbon-300);
+  background-color: var(--vw-ceramic-0);
+}
+.kt-checkbox:checked, .kt-checkbox:indeterminate {
+  background-color: var(--vw-ink-900);
+  border-color: var(--vw-ink-900);
+}
+input[type="checkbox"] { accent-color: var(--vw-ink-900); }
+
+/* Menus desplegables (dashboard) */
+.kt-dropdown-menu {
+  background: var(--vw-ceramic-0) !important;
+  border: 0 !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-xl) !important;
+  padding: 16px !important;
+}
+.kt-dropdown-menu label { border-radius: var(--radius-full); padding: 6px 8px; cursor: pointer; transition: background var(--dur-fast); }
+.kt-dropdown-menu label:hover { background: var(--vw-ceramic-200); }
+.kt-dropdown-menu label.border-b { border-radius: 0; border-color: var(--border); }
+.kt-dropdown-menu label span { letter-spacing: .02em; }
+
+/* ---------- Graficos (ApexCharts) ---------- */
+.apexcharts-canvas text { font-family: var(--font-display) !important; }
+.apexcharts-yaxis-label, .apexcharts-xaxis-label { fill: var(--text-muted); }
+.apexcharts-legend-text { color: var(--text-muted) !important; font-family: var(--font-display) !important; font-size: 12px !important; letter-spacing: .04em; text-transform: uppercase; font-weight: 600 !important; }
+.apexcharts-legend-marker { border-radius: 99px !important; }
+.apexcharts-gridline { stroke: var(--vw-ceramic-400); }
+.apexcharts-tooltip.apexcharts-theme-light {
+  border: 0 !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-xl) !important;
+  background: var(--vw-ceramic-0) !important;
+}
+.apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  background: var(--vw-ink-800) !important;
+  color: #fff;
+  border: 0 !important;
+  font-family: var(--font-display) !important;
+  text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+}
+
+/* ---------- Articulo de resumen ---------- */
+.vw-article { counter-reset: vwsec; }
+.vw-article section { counter-increment: vwsec; }
+.vw-article h2 {
+  font-family: var(--font-display);
+  font-size: 16px !important; line-height: 22px; letter-spacing: .03em; font-weight: 700 !important;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  display: flex; align-items: center; gap: 10px;
+}
+.vw-article h2::before {
+  content: counter(vwsec, decimal-leading-zero) " //";
+  font-size: 10px; letter-spacing: .1em; font-weight: 700; color: var(--vw-rust-600);
+}
+.vw-article p { color: var(--text-body); font-size: 14px; line-height: 24px; }
+.vw-article b { color: var(--text-strong); }
+.vw-kv {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(11, 35, 45, .3);
+}
+.vw-pod {
+  background: var(--vw-ink-800) !important;
+  color: #fff;
+  box-shadow: var(--shadow-md) !important;
+  border-radius: var(--radius-xl) !important;
+}
+.vw-pod .kt-card-title { color: #fff; }
+.vw-pod .kt-card-footer { border-top-color: var(--border-on-dark); }
+.vw-pod .vw-kv > span:first-child {
+  font-family: var(--font-display); font-size: 10px; letter-spacing: .1em; font-weight: 700;
+  text-transform: uppercase; color: var(--vw-ink-300) !important;
+}
+.vw-pod .vw-kv > span:last-child { color: #fff !important; font-size: 14px; font-weight: 700 !important; font-variant-numeric: tabular-nums; text-align: end; }
+.vw-pod .kt-btn-outline { background: var(--vw-ink-900); color: #fff; }
+.vw-pod .kt-btn-outline:hover { background: var(--vw-ink-700); color: #fff; }
+.vw-pod .kt-btn-primary { background: var(--vw-rust-600); box-shadow: var(--shadow-md); }
+.vw-pod .kt-btn-primary:hover { background: var(--vw-rust-400); color: var(--vw-rust-800); }
+
+/* ---------- Mapa (index.html) ---------- */
+#hud_distrito, #hud_capas { align-items: center; }
+#filtros_sidebar {
+  background: var(--vw-ceramic-100) !important;
+  border-inline-end: 0 !important;
+}
+#filtros_sidebar > div { border-color: var(--vw-ceramic-400) !important; }
+#filtros_toggle {
+  background: var(--vw-ceramic-0); border: 0; box-shadow: var(--shadow-sm); color: var(--text-strong);
+}
+#filtros_toggle:hover { background: var(--vw-ink-900); color: #fff; }
+.filtros-titulo {
+  font-family: var(--font-display);
+  font-size: 12px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+  color: var(--text-strong);
+}
+.filtro label.filtro-label {
+  font-family: var(--font-display);
+  font-size: 10px !important; line-height: 14px; letter-spacing: .1em; font-weight: 700 !important;
+  text-transform: uppercase;
+  color: var(--text-muted) !important;
+  margin-bottom: 6px !important;
+}
+.filtro .filtro-btn {
+  background: var(--vw-ceramic-0);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-strong);
+  text-transform: none;
+  letter-spacing: .02em;
+  font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.filtro .filtro-btn:hover { background: var(--vw-ceramic-300); }
+.filtro-lista {
+  background: var(--vw-ceramic-0) !important;
+  border: 0 !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-xl) !important;
+  padding: 6px !important;
+  margin-top: 6px !important;
+}
+/* Opciones de seleccion unica ("Colorear mapa por") */
+.filtro-lista .filtro-opcion {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 7px 12px; border-radius: var(--radius-full);
+  font-size: 12px; color: var(--vw-carbon-900); cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.filtro-lista .filtro-opcion:hover { background: var(--vw-ceramic-200); }
+.filtro-lista .filtro-opcion:active { background: var(--vw-ceramic-400); }
+.filtro-lista .filtro-opcion.filtro-opcion-activa { background: var(--vw-ink-900); color: #fff; font-weight: 600; }
+.filtro-lista .filtro-opcion.filtro-opcion-activa::after { content: "\2713"; font-weight: 700; color: var(--vw-rust-400); }
+.filtro .filtro-btn:active { background: var(--vw-ceramic-400); }
+.filtro-unico .filtro-lista { z-index: 1001; }
+.filtro-lista label { border-radius: var(--radius-full); padding: 6px 10px !important; color: var(--vw-carbon-900); }
+.filtro-lista label:hover { background: var(--vw-ceramic-200) !important; }
+.filtro-lista .todos {
+  background: var(--vw-ceramic-100) !important;
+  border-bottom: 0 !important;
+  margin-bottom: 4px !important;
+  font-family: var(--font-display);
+  font-size: 10px !important; letter-spacing: .1em; font-weight: 700 !important; text-transform: uppercase;
+  color: var(--text-strong) !important;
+}
+#contador {
+  font-family: var(--font-display) !important;
+  font-size: 10px !important; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+  color: var(--text-muted) !important;
+  text-align: center;
+}
+#mapa_area { border-radius: 0; }
+.mapa-fila { border-color: var(--vw-ceramic-400) !important; }
+
+/* Simbologia y leyenda bivariada: pildoras blancas elevadas */
+#leyenda_color, #leyenda_dl24 {
+  background: rgba(255, 255, 255, .96) !important;
+  border: 0 !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-xl) !important;
+  color: var(--vw-carbon-900);
+}
+.leyenda-color-cabecera, .leyenda-titulo {
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: .1em; font-weight: 700 !important; text-transform: uppercase;
+  color: var(--text-strong);
+}
+.leyenda-color-cabecera { padding: 10px 12px !important; }
+.leyenda-color-cuerpo { padding-inline: 12px !important; }
+.leyenda-color-fila { font-size: 12px; }
+.leyenda-color-muestra { border-radius: 99px !important; border-color: rgba(11, 35, 45, .15) !important; }
+.leyenda-eje-y, .leyenda-eje-x { color: var(--text-muted) !important; font-weight: 700; letter-spacing: .06em; }
+
+/* Popups de Leaflet */
+.leaflet-container { font-family: var(--font-body); background: var(--vw-ceramic-300); }
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  background: var(--vw-ceramic-0);
+}
+.leaflet-popup-content { color: var(--vw-carbon-900); }
+.leaflet-popup-content table td.k {
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted);
+  padding-block: 3px !important;
+}
+.leaflet-popup-content table td:not(.k) {
+  font-family: var(--font-display) !important; font-size: 13px !important; font-weight: 700; color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+.leaflet-bar { border: 0 !important; box-shadow: var(--shadow-md) !important; border-radius: var(--radius-md) !important; overflow: hidden; }
+.leaflet-bar a { color: var(--text-strong) !important; background: var(--vw-ceramic-0) !important; border-color: var(--vw-ceramic-400) !important; }
+.leaflet-bar a:hover { background: var(--vw-ink-900) !important; color: #fff !important; }
+
+/* Ventanas flotantes de resumen: panel tipo modal con cabecera de pod oscuro */
+.ventana {
+  background: var(--vw-ceramic-100) !important;
+  border: 0 !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-modal) !important;
+  font-size: 13px !important;
+}
+.ventana-cabecera {
+  background: var(--vw-ink-800) !important;
+  padding: 12px 12px 12px 20px !important;
+}
+.ventana-titulo {
+  font-family: var(--font-display);
+  font-size: 12px !important; letter-spacing: .08em; font-weight: 700 !important; text-transform: uppercase;
+  color: #fff;
+}
+.ventana-botones { display: flex; gap: 4px; }
+.ventana-botones button {
+  width: 26px !important; height: 26px !important; margin: 0 !important;
+  border-radius: 99px;
+  background: rgba(11, 35, 45, .5) !important;
+  color: var(--vw-ink-300) !important;
+  font-size: 12px !important; line-height: 1;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.ventana-botones button:hover { background: var(--vw-rust-600) !important; color: #fff !important; }
+.ventana-cuerpo { padding: 20px !important; }
+.ventana-cuerpo b, .am-bloque-cuerpo b {
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-strong);
+}
+.resumen-total {
+  font-family: var(--font-display) !important;
+  font-size: 12px !important; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--vw-rust-600);
+  margin-bottom: 12px !important;
+}
+.barra-fila { margin-bottom: 6px !important; gap: 8px; }
+.barra-etiqueta { font-size: 12px !important; font-weight: 600; color: var(--vw-carbon-900); }
+.barra-visual { height: 16px !important; background: var(--vw-ceramic-300) !important; border-radius: 99px !important; overflow: hidden; box-shadow: var(--shadow-inset); }
+.barra-rellena { border-radius: 99px !important; }
+.barra-valor {
+  font-family: var(--font-display) !important; font-weight: 700; font-size: 13px !important;
+  color: var(--text-strong); font-variant-numeric: tabular-nums;
+  width: auto !important; min-width: 36px;
+}
+.tabla-pivote-wrap { border-radius: var(--radius-md); margin-top: 8px; box-shadow: var(--shadow-sm); }
+.tabla-pivote { margin-top: 0 !important; background: var(--vw-ceramic-0); }
+.tabla-pivote th, .tabla-pivote td { border: 0 !important; border-bottom: 1px solid var(--vw-ceramic-400) !important; padding: 6px 8px !important; }
+.tabla-pivote th {
+  background: var(--vw-ink-800) !important; color: #fff;
+  font-family: var(--font-display); font-size: 10px !important; letter-spacing: .08em; text-transform: uppercase;
+  position: sticky; top: 0;
+}
+.tabla-pivote td:not(.etq) { font-family: var(--font-display) !important; font-variant-numeric: tabular-nums; }
+.tabla-pivote td.etq { background: var(--vw-ceramic-100) !important; color: var(--text-strong); }
+
+/* Tabla de atributos inferior */
+#tabla_datos_panel { background: var(--vw-ceramic-100) !important; border-color: var(--vw-ceramic-400) !important; }
+#tabla_datos_toggle {
+  font-family: var(--font-display);
+  font-size: 12px !important; letter-spacing: .08em; font-weight: 700 !important; text-transform: uppercase;
+  color: var(--text-strong);
+}
+#tabla_datos_toggle .material-symbols-outlined { transition: transform .2s var(--ease-std); }
+#tabla_datos_toggle .tabla-datos-icono-abierto { transform: rotate(180deg); }
+#tabla_datos { font-size: 12px !important; }
+#tabla_datos th, #tabla_datos td { border: 0 !important; padding: 8px 12px !important; }
+#tabla_datos thead th {
+  background: var(--vw-ink-800) !important;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: .08em; font-weight: 700; text-transform: uppercase;
+}
+#tabla_datos th.col-ordenable:hover { background: var(--vw-ink-900) !important; }
+#tabla_datos th.col-orden-asc::after, #tabla_datos th.col-orden-desc::after { color: var(--vw-rust-400); }
+#tabla_datos tbody tr:nth-child(odd) { background: var(--vw-ceramic-100); }
+#tabla_datos tbody tr:nth-child(even) { background: var(--vw-ceramic-200); }
+#tabla_datos tbody tr:hover { background: var(--vw-ceramic-400) !important; }
+#tabla_datos tbody tr.fila-seleccionada { background: var(--vw-rust-100) !important; color: var(--vw-rust-900); font-weight: 600; }
+#tabla_datos tbody tr.fila-seleccionada:hover { background: var(--vw-rust-300) !important; }
+
+/* Scrollbars discretas */
+* { scrollbar-width: thin; scrollbar-color: var(--vw-carbon-300) transparent; }
+.vw-pod .kt-card-header .vw-label { color: var(--text-accent-on-dark); }
+
+/* ---------- Boton "Guardar" en las ventanas de resumen ---------- */
+.ventana-botones button.ventana-guardar {
+  width: auto !important;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 0 12px 0 8px;
+  background: var(--vw-rust-600) !important;
+  color: #fff !important;
+  font-family: var(--font-display);
+  font-size: 10px !important; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+  margin-inline-end: 4px !important;
+}
+.ventana-botones button.ventana-guardar .material-symbols-outlined { font-size: 16px; }
+.ventana-botones button.ventana-guardar:hover { background: var(--vw-rust-400) !important; color: var(--vw-rust-800) !important; }
+
+/* ---------- Modal (ceramica, radio 48px, velo tinta 70% + blur) ---------- */
+.vw-modal-scrim {
+  position: fixed; inset: 0; z-index: 3000;
+  background: var(--surface-scrim);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  opacity: 0; transition: opacity var(--dur-fast) var(--ease-std);
+}
+.vw-modal {
+  width: 100%; max-width: 512px; box-sizing: border-box;
+  background: var(--vw-ceramic-100);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, .25);
+  padding: 28px;
+  display: flex; flex-direction: column; gap: 18px;
+  transform: scale(.95); transition: transform var(--dur-fast) var(--ease-std);
+}
+.vw-modal-scrim.vw-modal-abierta { opacity: 1; }
+.vw-modal-scrim.vw-modal-abierta .vw-modal { transform: scale(1); }
+.vw-modal-cabecera {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--vw-ceramic-400);
+}
+.vw-modal-cabecera h3 {
+  margin: 0; display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display);
+  font-size: 22px; line-height: 28px; letter-spacing: .03em; font-weight: 700; text-transform: uppercase;
+  color: var(--text-strong);
+}
+.vw-modal-icono { font-size: 26px; color: var(--vw-rust-600); }
+.vw-modal-cerrar {
+  width: 32px; height: 32px; flex-shrink: 0; border: 0; border-radius: 99px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--vw-ceramic-200); color: var(--vw-carbon-900);
+  transition: background var(--dur-fast);
+}
+.vw-modal-cerrar:hover { background: var(--vw-ceramic-400); }
+.vw-modal-cerrar .material-symbols-outlined { font-size: 18px; }
+.vw-modal-campos { display: flex; flex-direction: column; gap: 8px; }
+.vw-modal-campos .vw-label { color: var(--text-muted); }
+.vw-input {
+  width: 100%; box-sizing: border-box;
+  padding: 12px 18px; border: 0; border-radius: var(--radius-full);
+  background: var(--vw-ceramic-0); box-shadow: var(--shadow-sm);
+  font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-strong);
+  outline: none; transition: box-shadow var(--dur-fast);
+}
+.vw-input:focus { box-shadow: 0 0 0 2px var(--vw-rust-600); }
+.vw-input.vw-input-error { box-shadow: 0 0 0 2px var(--vw-error-600); }
+.vw-modal-nota, .vw-modal-texto {
+  margin: 4px 0 0; display: flex; gap: 6px; align-items: flex-start;
+  font-size: 12px; line-height: 18px; color: var(--text-muted);
+}
+.vw-modal-texto { font-size: 14px; line-height: 20px; color: var(--text-body); margin: 0; }
+.vw-modal-nota .material-symbols-outlined { color: var(--vw-rust-600); margin-top: 1px; }
+.vw-modal-pie { display: flex; gap: 8px; }
+.vw-modal-pie .kt-btn { height: 48px; flex: 1; }
+.vw-modal-pie .vw-modal-accion { flex: 2; gap: 8px; font-size: 14px; letter-spacing: .1em; font-weight: 700; box-shadow: var(--shadow-xl); }
+.vw-modal-pie .vw-modal-accion-peligro { background: var(--vw-error-600); }
+.vw-modal-pie .vw-modal-accion-peligro:hover { background: var(--vw-rust-700); }
+
+/* ---------- Avisos ---------- */
+.vw-toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 3100;
+  transform: translate(-50%, 16px); opacity: 0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px; border-radius: var(--radius-full);
+  background: var(--vw-ink-900); color: #fff; box-shadow: var(--shadow-xl);
+  font-size: 13px; font-weight: 500;
+  transition: opacity var(--dur-base) var(--ease-std), transform var(--dur-base) var(--ease-std);
+}
+.vw-toast.vw-toast-visible { opacity: 1; transform: translate(-50%, 0); }
+.vw-toast .material-symbols-outlined { color: var(--vw-rust-400); }
+.vw-toast a {
+  color: var(--vw-amber-400); font-family: var(--font-display);
+  font-size: 11px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+}
+.vw-toast.vw-toast-error { background: var(--vw-error-600); }
+.vw-toast.vw-toast-error .material-symbols-outlined { color: #fff; }
+
+/* ---------- Hoja Analisis manual ---------- */
+.am-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+@media (max-width: 80rem) { .am-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 48rem) { .am-grid { grid-template-columns: minmax(0, 1fr); } }
+.am-bloque {
+  min-width: 0; overflow: hidden;
+  background: var(--vw-ceramic-100);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+}
+.am-bloque-cabecera {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 16px 16px 14px 20px;
+  background: var(--vw-ink-800); color: #fff;
+}
+.am-bloque-titulos { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.am-bloque-eyebrow { color: var(--vw-rust-400); }
+.am-bloque-cabecera h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 14px; line-height: 20px; letter-spacing: .04em; font-weight: 700; text-transform: uppercase;
+  color: #fff; overflow-wrap: anywhere;
+}
+.am-eliminar {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 12px 6px 8px; border: 0; border-radius: var(--radius-full); cursor: pointer;
+  background: rgba(11, 35, 45, .5); color: var(--vw-ink-300);
+  font-family: var(--font-display);
+  font-size: 10px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.am-eliminar:hover { background: var(--vw-error-600); color: #fff; }
+.am-bloque-meta {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 12px 20px 0; color: var(--text-muted);
+}
+.am-bloque-contexto { font-size: 12px; line-height: 18px; font-style: italic; overflow-wrap: anywhere; }
+.am-bloque-cuerpo { padding: 14px 20px 20px; font-size: 13px; min-width: 0; }
+.am-bloque-cuerpo .barra-etiqueta { width: 110px; }
+.am-bloque-cuerpo .tabla-pivote-wrap { max-height: none; overflow-y: visible; }
+.am-vacio {
+  max-width: 560px; margin: 24px auto 0; padding: 40px 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+}
+.am-vacio[hidden] { display: none; }
+.am-vacio p { margin: 0 0 8px; font-size: 14px; line-height: 20px; color: var(--text-muted); }
+.am-vacio-icono {
+  font-size: 32px; width: 64px; height: 64px; border-radius: 99px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--vw-ink-900); color: var(--vw-rust-400);
+}
+#am_exportar { gap: 6px; }
+
+/* Reordenar bloques: manija de arrastre y boton "Guardar orden" */
+.am-bloque-acciones { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.am-manija {
+  width: 30px; height: 30px; border: 0; border-radius: 99px; cursor: grab;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(11, 35, 45, .5); color: var(--vw-ink-300);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.am-manija:hover { background: var(--vw-ink-900); color: #fff; }
+.am-manija:active { cursor: grabbing; }
+.am-bloque.am-arrastrando { opacity: .35; outline: 2px dashed var(--vw-rust-600); outline-offset: 4px; }
+.am-guardar-orden { gap: 6px; }
+.am-guardar-orden.am-guardar-orden-pendiente {
+  background: var(--vw-rust-600); color: #fff; box-shadow: var(--shadow-md);
+}
+.am-guardar-orden.am-guardar-orden-pendiente:hover { background: var(--vw-rust-400); color: var(--vw-rust-800); }
+
+/* Captura del mapa dentro de un bloque */
+.am-captura { margin: 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--vw-ceramic-300); }
+.am-captura img { display: block; width: 100%; height: auto; }
+
+/* Boton flotante "Guardar vista" sobre el mapa */
+.vw-map-btn {
+  position: absolute; top: 12px; left: 56px; z-index: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px 8px 12px; border: 0; border-radius: var(--radius-full); cursor: pointer;
+  background: var(--vw-ceramic-0); color: var(--text-strong); box-shadow: var(--shadow-md);
+  font-family: var(--font-display);
+  font-size: 11px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.vw-map-btn:hover { background: var(--vw-ink-900); color: #fff; }
+.vw-map-btn:active { background: var(--vw-rust-600); color: #fff; }
+.vw-map-btn .material-symbols-outlined { color: var(--vw-rust-600); }
+.vw-map-btn:hover .material-symbols-outlined, .vw-map-btn:active .material-symbols-outlined { color: inherit; }
+.vw-map-btn.vw-map-btn-ocupado { opacity: .6; cursor: progress; }
+
+/* ---------- PDF: A4 horizontal, hasta 2 cuadros 1:1 por pagina ---------- */
+.am-pdf-escenario { position: fixed; left: 0; top: 0; z-index: -1; pointer-events: none; }
+.am-pdf-velo { z-index: 4000; }
+.am-pdf-progreso { position: static; transform: none; }
+.am-pdf-pagina {
+  box-sizing: border-box; position: relative;
+  background: var(--surface-page); color: var(--text-body);
+  display: flex; flex-direction: column; gap: 20px;
+}
+.am-pdf-cabecera {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+  padding: 18px 24px;
+  background: var(--vw-ink-900); color: #fff; border-radius: var(--radius-lg);
+}
+.am-pdf-cabecera h1 {
+  margin: 4px 0 0; font-family: var(--font-display);
+  font-size: 24px; line-height: 28px; letter-spacing: .05em; font-weight: 700; text-transform: uppercase;
+}
+.am-export-eyebrow { color: var(--vw-rust-400); }
+.am-export-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; color: var(--vw-ink-300); }
+.am-pdf-rejilla { display: grid; }
+.am-pdf-cuadro {
+  box-sizing: border-box; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--vw-ceramic-100);
+  border: 1px solid var(--vw-ceramic-400);
+  border-radius: 24px;
+}
+.am-pdf-cuadro .am-bloque-cabecera { padding: 16px 22px 14px; flex-shrink: 0; }
+.am-pdf-cuadro .am-bloque-cabecera h3 {
+  font-size: 17px; line-height: 22px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.am-pdf-cuadro .am-bloque-meta { padding: 12px 22px 0; flex-shrink: 0; }
+.am-pdf-cuadro .am-bloque-contexto {
+  font-size: 12px; line-height: 17px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.am-pdf-caja { position: relative; flex: 1; min-height: 0; margin: 14px 22px 22px; overflow: hidden; }
+.am-pdf-interior {
+  position: absolute; top: 0; left: 0; padding: 0;
+  transform-origin: top left; box-sizing: border-box;
+}
+.am-pdf-interior .tabla-pivote-wrap { overflow: visible; max-height: none; box-shadow: none; }
+.am-pdf-interior .am-captura { box-shadow: none; }
+.am-pdf-pie {
+  position: absolute; left: 36px; right: 36px; bottom: 24px;
+  display: flex; justify-content: space-between; color: var(--text-muted);
+}
+
+/* html2canvas (captura del mapa y PDF) mide la linea base del texto con una <img> auxiliar de 1x1 px
+   que inserta en la pagina. El preflight de Tailwind (styles.css) pone img { display: block } y eso
+   desplaza todo el texto hacia abajo en la imagen, cortando letras en contenedores con overflow oculto. */
+img[width="1"][height="1"] { display: inline !important; }

@@ -1,0 +1,332 @@
+/* Estructura base de los componentes propios de la app (filtros, leyenda, ventanas, tabla).
+   Se carga antes de tema.css, que les da el estilo visual. */
+.filtro { margin-bottom: 10px; position: relative; }
+.filtro label.filtro-label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; color: var(--tw-prose-body, #4b5675); }
+.filtro-lista {
+  display: none; position: absolute; z-index: 1000; background: #fff;
+  border: 1px solid #dbdfe9; border-radius: 6px; max-height: 220px; overflow-y: auto;
+  width: 100%; box-sizing: border-box; box-shadow: 0 4px 12px rgba(0,0,0,0.12); margin-top: 2px;
+}
+.filtro-lista.abierta { display: block; }
+.filtro-lista label {
+  display: block; font-size: 12px; font-weight: normal; padding: 6px 10px; margin: 0; cursor: pointer;
+}
+.filtro-lista label:hover { background: #f5f8fa; }
+.filtro-lista input { margin-right: 6px; }
+.filtro-lista .todos {
+  font-weight: 600; border-bottom: 1px solid #eef1f4; background: #f9fafb;
+}
+
+/* Columna lateral de filtros contraible: no existe un componente equivalente en Metronic */
+#filtros_sidebar {
+  width: 300px;
+  min-width: 300px;
+  transition: width .25s ease, min-width .25s ease;
+  overflow: hidden;
+}
+#filtros_sidebar.filtros-colapsado {
+  width: 60px;
+  min-width: 60px;
+}
+#filtros_sidebar.filtros-colapsado .filtros-titulo,
+#filtros_sidebar.filtros-colapsado .filtros-cuerpo,
+#filtros_sidebar.filtros-colapsado .filtros-pie {
+  display: none;
+}
+#filtros_toggle_icon { transition: transform .25s ease; }
+#filtros_sidebar.filtros-colapsado #filtros_toggle_icon { transform: rotate(180deg); }
+#mapa_area { min-width: 0; }
+.mapa-fila { min-height: 0; }
+#filtros { overflow-y: auto; }
+
+/* HUD de botones tipo "slicer" de Power BI: no existe un componente equivalente en Metronic */
+.hud-btn {
+  background: #fff; border-color: #dbdfe9; color: #4b5675;
+}
+.hud-btn.hud-btn-activo {
+  background: #1b84ff; border-color: #1b84ff; color: #fff;
+}
+
+/* Simbologia de la variable coloreada en el mapa (esquina superior derecha), contraible: no existe un componente equivalente en Metronic */
+#leyenda_color {
+  position: absolute; top: 12px; right: 12px; z-index: 500;
+  background: #fff; border: 1px solid #dbdfe9; border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18); font-size: 11px; max-width: 220px;
+  overflow: hidden;
+}
+.leyenda-color-cabecera {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 8px 10px; font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+.leyenda-color-cuerpo {
+  padding: 0 10px 10px 10px; max-height: 220px; overflow-y: auto;
+  transition: max-height .2s ease, padding .2s ease;
+}
+#leyenda_color.leyenda-color-colapsada .leyenda-color-cuerpo {
+  max-height: 0; padding-top: 0; padding-bottom: 0; overflow: hidden;
+}
+#leyenda_color_toggle_icon { transition: transform .2s ease; }
+#leyenda_color.leyenda-color-colapsada #leyenda_color_toggle_icon { transform: rotate(180deg); }
+.leyenda-color-fila { display: flex; align-items: center; gap: 6px; padding: 3px 0; }
+.leyenda-color-muestra { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,.15); flex-shrink: 0; }
+
+#map { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; }
+.leaflet-popup-content { font-size: 12px; max-height: 250px; overflow-y: auto; }
+.leaflet-popup-content table td { vertical-align: top; padding: 1px 4px; }
+.leaflet-popup-content table td.k { font-weight: bold; white-space: nowrap; }
+
+/* Ventanas flotantes de resumen: no existe un componente equivalente en Metronic */
+.ventana {
+  position: fixed; width: 480px; background: #fff; border: 1px solid #dbdfe9; border-radius: .75rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25); z-index: 2000; font-size: 12px;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.ventana-cabecera {
+  background: #1b84ff; color: #fff; padding: 8px 10px; cursor: move;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.ventana-titulo { font-weight: 600; font-size: 13px; }
+.ventana-botones button {
+  background: none; border: none; color: #fff; font-size: 13px; cursor: pointer;
+  margin-left: 6px; width: 20px; height: 20px;
+}
+.ventana-cuerpo { padding: 12px; overflow: auto; }
+.ventana.minimizada .ventana-cuerpo { display: none; }
+.ventana.minimizada { width: 260px; }
+.barra-fila { display: flex; align-items: center; margin-bottom: 4px; }
+.barra-etiqueta { width: 130px; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barra-visual { height: 14px; flex: 1; background: #f1f1f4; border-radius: 3px; position: relative; }
+.barra-rellena { height: 100%; border-radius: 3px; }
+.tabla-pivote { border-collapse: collapse; margin-top: 8px; width: 100%; }
+.tabla-pivote th, .tabla-pivote td {
+  border: 1px solid #eef1f4; padding: 3px 6px; font-size: 11px; text-align: center; white-space: nowrap;
+}
+.tabla-pivote th { background: #f9fafb; }
+.tabla-pivote td.etq { text-align: left; font-weight: 600; background: #fbfbfb; }
+.tabla-pivote-wrap { overflow-x: auto; max-height: 220px; overflow-y: auto; }
+
+/* Panel inferior con tabla de atributos, expandible/contraible: no existe un componente equivalente en Metronic */
+/* min-width:0 en toda la cadena flex es necesario para que el ancho de la tabla no "empuje"
+   al resto de la pagina (mapa, sidebar, header) y provoque scroll horizontal global; el scroll
+   horizontal debe quedar contenido unicamente dentro de .tabla-datos-scroll */
+#app_wrapper { min-width: 0; }
+.kt-wrapper { min-width: 0; }
+#content { min-width: 0; }
+#tabla_datos_panel { min-width: 0; }
+#tabla_datos_toggle_icon { transition: transform .2s ease; }
+#tabla_datos_toggle_icon.tabla-datos-icono-abierto { transform: rotate(180deg); }
+#tabla_datos_wrap {
+  min-width: 0; max-height: 0; overflow: hidden; transition: max-height .25s ease;
+}
+#tabla_datos_wrap.tabla-datos-abierta {
+  max-height: 320px;
+}
+.tabla-datos-scroll { min-width: 0; width: 100%; max-height: 320px; overflow: auto; }
+#tabla_datos { border-collapse: collapse; font-size: 11px; white-space: nowrap; }
+#tabla_datos th, #tabla_datos td { border: 1px solid #eef1f4; padding: 3px 6px; text-align: left; }
+#tabla_datos thead th { background: #f9fafb; position: sticky; top: 0; z-index: 1; }
+#tabla_datos th.col-ordenable { cursor: pointer; user-select: none; }
+#tabla_datos th.col-ordenable:hover { background: #eef1f4; }
+#tabla_datos th.col-orden-asc::after { content: '\25B2'; font-size: 9px; margin-left: 4px; }
+#tabla_datos th.col-orden-desc::after { content: '\25BC'; font-size: 9px; margin-left: 4px; }
+#tabla_datos tbody tr { cursor: pointer; }
+#tabla_datos tbody tr:hover { background: #f5f8fa; }
+#tabla_datos tbody tr.fila-seleccionada { background: #d6e9ff; }
+#tabla_datos tbody tr.fila-seleccionada:hover { background: #c3ddff; }
+</style>
+
+/* ---------- Componentes nuevos del mapa de cobertura ---------- */
+#filtros { overflow-y: auto; }
+.mapa-acciones { display: flex; gap: 6px; }
+.mapa-acciones .kt-btn { flex: 1; }
+
+/* Popups */
+.vw-popup { font-family: var(--font-body); min-width: 230px; }
+.vw-popup-sub {
+  font-family: var(--font-display); font-size: 10px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+  color: var(--vw-rust-600); margin-bottom: 2px;
+}
+.vw-popup-titulo {
+  font-family: var(--font-display); font-size: 15px; line-height: 20px; font-weight: 700; letter-spacing: .02em;
+  text-transform: uppercase; color: var(--text-strong); margin-bottom: 8px;
+}
+.vw-popup table { border-collapse: collapse; width: 100%; }
+.vw-popup td { padding: 3px 0; vertical-align: top; font-size: 12px; border-bottom: 1px solid var(--vw-ceramic-300); }
+.vw-popup td.k { color: var(--text-muted); padding-right: 12px; }
+.vw-popup td:not(.k) { font-weight: 700; color: var(--text-strong); text-align: right; font-variant-numeric: tabular-nums; }
+.vw-popup-nota { font-size: 10px; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+.vw-popup-texto { font-size: 13px; line-height: 19px; margin: 8px 0; color: var(--vw-carbon-900); }
+.vw-popup-prioridad {
+  display: inline-block; padding: 3px 10px; border-radius: 99px; color: #fff;
+  font-family: var(--font-display); font-size: 10px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+}
+.vw-popup-enlace {
+  font-family: var(--font-display); font-size: 11px; letter-spacing: .08em; font-weight: 700; text-transform: uppercase;
+  color: var(--vw-rust-600) !important;
+}
+.vw-chip { display: inline-block; width: 10px; height: 10px; border-radius: 99px; vertical-align: middle; margin-left: 4px; }
+.vw-tooltip {
+  background: var(--vw-ink-900); color: #fff; border: 0; border-radius: 99px; padding: 4px 10px; box-shadow: var(--shadow-md);
+  font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+.vw-tooltip::before { display: none; }
+
+/* Rombos de zonas recomendadas */
+.vw-zona-icono { background: none; border: 0; }
+.vw-zona-rombo {
+  position: absolute; left: 6px; top: 6px; width: 18px; height: 18px; border-radius: 5px;
+  transform: rotate(45deg); box-shadow: 0 0 0 2px #fff, var(--shadow-md);
+  display: flex; align-items: center; justify-content: center;
+}
+.vw-zona-rombo .material-symbols-outlined { transform: rotate(-45deg); font-size: 13px; color: #fff; }
+.vw-zona-id {
+  position: absolute; left: 26px; top: 7px; padding: 1px 6px; border-radius: 99px;
+  background: rgba(255, 255, 255, .92); color: var(--text-strong); box-shadow: var(--shadow-sm);
+  font-family: var(--font-display); font-size: 9px; letter-spacing: .06em; font-weight: 700; white-space: nowrap;
+}
+
+/* Leyenda por secciones */
+.leyenda-seccion {
+  font-family: var(--font-display); font-size: 9px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase;
+  color: var(--vw-rust-600); margin: 8px 0 2px;
+}
+.leyenda-seccion:first-child { margin-top: 0; }
+.leyenda-nota { font-size: 10px; color: var(--text-muted); font-style: italic; margin-top: 2px; }
+.leyenda-color-muestra.rombo { border-radius: 3px !important; transform: rotate(45deg) scale(.85); }
+.leyenda-color-muestra.cuadro { border-radius: 2px !important; }
+.leyenda-color-muestra.linea { height: 4px !important; border-radius: 2px !important; border: 0 !important; }
+#leyenda_color { max-width: 250px !important; }
+.leyenda-color-cuerpo { max-height: 60vh !important; }
+
+/* Ventanas de resumen */
+.ventana-seccion { margin: 12px 0 6px; }
+.resumen-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 4px; }
+.resumen-kpis > div { background: var(--vw-ink-800); color: #fff; border-radius: 16px; padding: 8px 12px; display: flex; flex-direction: column; gap: 2px; }
+.resumen-kpis span { font-family: var(--font-display); font-size: 9px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase; color: var(--vw-ink-300); }
+.resumen-kpis b { font-family: var(--font-display); font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums; color: #fff; text-transform: none; letter-spacing: 0; }
+
+/* Tabla de CAI */
+#tabla_datos th.num, #tabla_datos td.num { text-align: right !important; font-variant-numeric: tabular-nums; }
+
+/* Dashboard e informe */
+.vw-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+.vw-tabla { width: 100%; border-collapse: collapse; font-size: 13px; }
+.vw-tabla th {
+  background: var(--vw-ink-800); color: #fff; text-align: left; padding: 10px 12px;
+  font-family: var(--font-display); font-size: 10px; letter-spacing: .08em; font-weight: 700; text-transform: uppercase;
+}
+.vw-tabla th:first-child { border-top-left-radius: 16px; }
+.vw-tabla th:last-child { border-top-right-radius: 16px; }
+.vw-tabla td { padding: 9px 12px; border-bottom: 1px solid var(--vw-ceramic-400); vertical-align: top; }
+.vw-tabla tr:nth-child(even) td { background: var(--vw-ceramic-100); }
+.vw-tabla td.num, .vw-tabla th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.vw-tabla a { color: var(--vw-rust-600); font-weight: 600; }
+.vw-prioridad {
+  display: inline-block; padding: 2px 9px; border-radius: 99px; color: #fff; white-space: nowrap;
+  font-family: var(--font-display); font-size: 10px; letter-spacing: .08em; font-weight: 700; text-transform: uppercase;
+}
+.vw-scroll-x { overflow-x: auto; }
+.vw-nota-metodo { font-size: 12px; line-height: 18px; color: var(--text-muted); }
+.vw-nota-metodo li { margin: 4px 0; }
+.zoom-lejos .vw-zona-id { display: none; }
+.zoom-lejos .vw-zona-rombo { transform: rotate(45deg) scale(.72); }
+/* La leyenda nunca rebasa el area del mapa; su cuerpo se desplaza */
+#leyenda_color { max-height: calc(100% - 24px); display: flex; flex-direction: column; }
+#leyenda_color .leyenda-color-cuerpo { flex: 1 1 auto; min-height: 0; max-height: none !important; }
+#leyenda_color.leyenda-color-colapsada .leyenda-color-cuerpo { max-height: 0 !important; }
+
+/* Fila de indicadores clave: en columna en pantallas chicas, en fila desde 1024px */
+.kpi-row { display: flex; flex-direction: column; }
+@media (min-width: 1024px) { .kpi-row { flex-direction: row; } }
+
+/* Listas con viñeta (el preflight de Tailwind las quita) */
+.vw-article ul, .vw-nota-metodo ul { list-style: disc; padding-left: 20px; }
+.vw-article li::marker, .vw-nota-metodo li::marker { color: var(--vw-rust-600); }
+.vw-tabla td a { white-space: nowrap; }
+
+/* ================= Conglomerado RL (municipio de Chihuahua) ================= */
+
+/* Panel de carga del Conglomerado (datos locales del navegador) */
+.cg-panel { background: var(--vw-ink-800); color: #fff; border-radius: var(--radius-md); padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.cg-panel p { margin: 0; font-size: 12px; line-height: 17px; color: var(--vw-ink-300); }
+.cg-panel p b { color: #fff; }
+.cg-panel-titulo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.cg-panel-titulo .material-symbols-outlined { color: var(--vw-rust-400); }
+.cg-panel-estado { display: flex; gap: 10px; align-items: flex-start; }
+.cg-panel-estado .material-symbols-outlined { color: var(--vw-rust-400); }
+.cg-panel-estado div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cg-panel-estado b { font-size: 12px; overflow-wrap: anywhere; }
+.cg-panel-estado span:not(.material-symbols-outlined) { font-size: 11px; color: var(--vw-ink-300); }
+.cg-panel-botones { display: flex; flex-wrap: wrap; gap: 6px; }
+.cg-panel .kt-btn-outline { background: rgba(11, 35, 45, .5); color: var(--vw-ink-300); }
+.cg-panel .kt-btn-outline:hover { background: var(--vw-ink-900); color: #fff; }
+.cg-panel .kt-btn-primary { background: var(--vw-rust-600); gap: 6px; }
+.cg-panel .kt-btn-primary:hover { background: var(--vw-rust-400); color: var(--vw-rust-800); }
+.cg-panel label.kt-btn { cursor: pointer; }
+.cg-panel-msg { font-size: 11px; color: var(--vw-amber-400); min-height: 0; }
+.cg-panel-msg:empty { display: none; }
+.cg-pagina-panel { max-width: 560px; }
+.cg-vacio { padding: 18px !important; color: var(--text-muted); font-style: italic; }
+
+/* Popups: desglose de coaliciones e historial de opiniones */
+.vw-popup-desglose { font-size: 10px; color: var(--text-muted); text-transform: none; letter-spacing: 0; margin-top: 1px; }
+.cg-hist { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 3px 0; font-size: 11px; }
+.cg-hist span { min-width: 92px; color: var(--text-muted); }
+.cg-hist b, .mg-chip {
+  display: inline-block; padding: 2px 8px; border-radius: 99px; color: #fff; font-size: 11px; font-weight: 700; white-space: nowrap;
+}
+
+/* Leyenda bivariada PAN vs oposicion */
+.leyenda-biv { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.leyenda-biv-y { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--text-muted); }
+.leyenda-biv-grid { display: grid; grid-template-columns: repeat(4, 16px); grid-template-rows: repeat(4, 16px); gap: 2px; }
+.leyenda-biv-grid div { border-radius: 2px; }
+.leyenda-biv-x { font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--text-muted); margin: 3px 0 0 22px; }
+.leyenda-color-muestra.cerrada { border: 1.5px solid #ff0000 !important; border-radius: 1px !important; }
+.leyenda-color-muestra.colonia { border: 1.5px dashed #000 !important; border-radius: 1px !important; }
+
+/* Resumen de secciones: partidos dentro de la coalicion */
+.barra-fila.barra-sub .barra-etiqueta { padding-left: 14px; font-weight: 400 !important; color: var(--text-muted) !important; }
+.barra-fila.barra-sub .barra-visual { height: 10px !important; }
+.vw-sub-num { font-size: 10px; color: var(--text-muted); white-space: nowrap; }
+
+/* Migracion de opinion */
+.mg-filtros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+.mg-filtros input, .mg-filtros select {
+  width: 100%; box-sizing: border-box; padding: 9px 14px; border: 0; border-radius: var(--radius-full);
+  background: var(--vw-ceramic-0); box-shadow: var(--shadow-sm); font-size: 13px; font-weight: 600; color: var(--text-strong);
+}
+.mg-filtros input:focus, .mg-filtros select:focus { outline: none; box-shadow: 0 0 0 2px var(--vw-rust-600); }
+.mg-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; align-items: start; }
+@media (max-width: 40rem) { .mg-lista { grid-template-columns: 1fr; } }
+.mg-tarjeta { background: var(--vw-ceramic-100); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+.mg-cab { display: flex; justify-content: space-between; gap: 12px; padding: 14px 18px; background: var(--vw-ink-800); color: #fff; }
+.mg-cab h3 { margin: 2px 0; font-family: var(--font-display); font-size: 15px; line-height: 20px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+.mg-sub { color: var(--vw-rust-400); }
+.mg-tel { font-size: 12px; color: var(--vw-ink-300); font-variant-numeric: tabular-nums; }
+.mg-sin-ficha .mg-cab { background: var(--vw-ink-600); }
+.mg-resumen { text-align: right; font-size: 11px; color: var(--vw-ink-300); line-height: 16px; white-space: nowrap; }
+.mg-resumen b { color: #fff; font-size: 14px; }
+.mg-linea { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 14px 18px; }
+.mg-paso { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
+.mg-fecha { font-family: var(--font-display); font-size: 9px; letter-spacing: .08em; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
+.mg-flecha { color: var(--vw-carbon-300); font-weight: 700; margin-top: 12px; }
+.mg-flecha-cambio { color: var(--vw-rust-600); }
+.mg-ficha { border-top: 1px solid var(--vw-ceramic-400); }
+.mg-ficha summary { cursor: pointer; padding: 10px 18px; font-family: var(--font-display); font-size: 10px; letter-spacing: .1em; font-weight: 700; text-transform: uppercase; color: var(--vw-rust-600); }
+.mg-ficha-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 16px; padding: 0 18px 16px; }
+.mg-ficha-grid div { display: flex; flex-direction: column; min-width: 0; }
+.mg-ficha-grid span { font-size: 10px; color: var(--text-muted); }
+.mg-ficha-grid b { font-size: 12px; color: var(--text-strong); overflow-wrap: anywhere; font-weight: 600; }
+.mg-matriz { border-collapse: collapse; font-size: 12px; }
+.mg-matriz th, .mg-matriz td { padding: 6px 8px; border: 1px solid var(--vw-ceramic-400); text-align: center; font-variant-numeric: tabular-nums; }
+.mg-matriz thead th { background: var(--vw-ink-800); color: #fff; font-size: 10px; letter-spacing: .04em; font-weight: 700; }
+.mg-matriz tbody th { text-align: left; background: var(--vw-ceramic-100); }
+
+/* Los indicadores de las ventanas de resumen van en blanco sobre el recuadro oscuro
+   (el tema da a ".ventana-cuerpo b" color oscuro y mayor prioridad) */
+.ventana-cuerpo .resumen-kpis b { color: #fff; font-size: 16px; letter-spacing: 0; text-transform: none; }
+.ventana-cuerpo .resumen-kpis span { color: var(--vw-ink-300); }
+
+/* Dashboard: leyendas compactas (7 candidatos no deben aplastar las graficas) */
+#d_contenido .apexcharts-legend-text, #d_contenido_2 .apexcharts-legend-text { font-size: 10px !important; letter-spacing: .02em; }

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="h-full" data-kt-theme="true" data-kt-theme-mode="light" lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mapa interactivo — Conglomerado RL Chihuahua</title>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<meta name="description" content="Mapa de secciones, colonias, cerradas y respuestas del Conglomerado RL en el municipio de Chihuahua.">
+<meta name="robots" content="noindex, nofollow">
+<link href="assets/media/app/favicon.ico" rel="shortcut icon">
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
+<link href="assets/css/styles.css" rel="stylesheet">
+<link href="assets/css/app.css" rel="stylesheet">
+<!-- Tema visual: va al final para tener prioridad -->
+<link href="assets/css/tema.css" rel="stylesheet">
+</head>
+<body class="antialiased flex h-full text-base text-foreground bg-background demo1 kt-sidebar-fixed kt-header-fixed">
+<script>
+  document.documentElement.classList.add('light');
+</script>
+
+<div class="flex grow" id="app_wrapper">
+  <!-- Sidebar -->
+  <div class="kt-sidebar fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
+    <div class="kt-sidebar-header hidden lg:flex relative shrink-0" id="sidebar_header">
+      <a class="vw-logo-block" href="index.html" title="Vernier — Consultoría Global y Estudios de Opinión">
+        <img src="assets/media/brand/vernier-logo-white.png" alt="Vernier">
+      </a>
+      <div class="vw-sidebar-code">
+        <span><span class="vw-dot"></span><span class="vw-label">CUU // Conglomerado RL</span></span>
+        <span class="vw-label">DL 12–18</span>
+      </div>
+      <button class="kt-btn kt-btn-icon size-[30px] absolute start-full z-40 -translate-x-2/4 -translate-y-2/4" data-kt-toggle="body" data-kt-toggle-class="kt-sidebar-collapse" id="sidebar_toggle" title="Contraer/expandir menú">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+    </div>
+    <div class="kt-sidebar-content flex grow shrink-0 py-5 pe-2" id="sidebar_content">
+      <div class="kt-scrollable-y-hover grow shrink-0 flex ps-2 lg:ps-5 pe-1 lg:pe-3" data-kt-scrollable="true" data-kt-scrollable-dependencies="#sidebar_header" data-kt-scrollable-height="auto" data-kt-scrollable-offset="0px" data-kt-scrollable-wrappers="#sidebar_content" id="sidebar_scrollable">
+        <div class="kt-menu flex flex-col grow" data-kt-menu="true" id="sidebar_menu">
+          <div class="kt-menu-item active">
+            <a class="kt-menu-link items-center grow" href="index.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">radar</span></span>
+              <span class="kt-menu-title">Mapa interactivo</span>
+              <span class="vw-nav-num">01</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="dashboard.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">query_stats</span></span>
+              <span class="kt-menu-title">Dashboard KPIs</span>
+              <span class="vw-nav-num">02</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="resumen.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">menu_book</span></span>
+              <span class="kt-menu-title">Resumen y hallazgos</span>
+              <span class="vw-nav-num">03</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="migracion.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">swap_horiz</span></span>
+              <span class="kt-menu-title">Migración de opinión</span>
+              <span class="vw-nav-num">04</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="analisis.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">dashboard_customize</span></span>
+              <span class="kt-menu-title">Análisis manual</span>
+              <span class="vw-nav-num">05</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vw-sidebar-foot shrink-0">
+      <div class="vw-row"><span class="vw-label">Vernier // Estudios de opinión</span><span class="material-symbols-outlined vw-ico-16">tune</span></div>
+    </div>
+  </div>
+  <!-- End of Sidebar -->
+
+  <!-- Wrapper -->
+  <div class="kt-wrapper flex grow flex-col">
+    <!-- Header -->
+    <header class="kt-header fixed top-0 z-10 start-0 end-0 flex items-stretch shrink-0" data-kt-sticky="true" data-kt-sticky-name="header" id="header">
+      <div class="kt-container-fixed flex justify-between items-stretch gap-3 lg:gap-4" id="headerContainer">
+        <div class="flex gap-2.5 lg:hidden items-center -ms-1">
+          <button class="kt-btn kt-btn-icon kt-btn-ghost" data-kt-drawer-toggle="#sidebar">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+        <div class="vw-topbar-title grow">
+          <h2>/Mapa interactivo</h2>
+          <span class="vw-label">Municipio de Chihuahua • Conglomerado RL</span>
+        </div>
+        <div class="flex items-center gap-2.5"><span class="vw-counter"><span class="vw-dot vw-dot-live"></span><span id="contador_header">—</span></span></div>
+      </div>
+    </header>
+    <!-- End of Header -->
+
+    <!-- Content -->
+    <main class="grow flex flex-col" id="content" role="content" style="height: calc(100vh - var(--header-height));">
+      <div class="kt-container-fixed shrink-0 grow-0 pt-3">
+        <div class="flex flex-wrap items-center gap-2 pb-2" id="hud_dl">
+          <span class="vw-label vw-hud-label">Distrito local //</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 pb-2" id="hud_df">
+          <span class="vw-label vw-hud-label">Distrito federal //</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 pb-3" id="hud_capas">
+          <span class="vw-label vw-hud-label">Capas //</span>
+          <span class="flex flex-wrap items-center gap-2" id="hud_capas_botones"></span>
+          <button type="button" class="kt-btn kt-btn-sm kt-btn-primary" id="resumen_secciones_btn" title="Resultados 2024 de las secciones seleccionadas (o de todas las visibles)">Generar resumen de secciones</button>
+          <button type="button" class="kt-btn kt-btn-sm kt-btn-outline" id="secciones_limpiar_btn" style="display:none;">Quitar selección (<span id="secciones_contador_sel">0</span>)</button>
+        </div>
+      </div>
+
+      <div class="flex grow border-t border-border mapa-fila">
+        <!-- Columna lateral: carga del Conglomerado y filtros, contraible -->
+        <div class="bg-background border-e border-border flex flex-col shrink-0" id="filtros_sidebar">
+          <div class="flex items-center justify-between px-4 py-3 border-b border-border shrink-0">
+            <h3 class="kt-card-title filtros-titulo">Filtros</h3>
+            <button class="kt-btn kt-btn-outline kt-btn-icon size-[30px] shrink-0" id="filtros_toggle" title="Contraer/expandir filtros">
+              <span class="material-symbols-outlined vw-ico-18" id="filtros_toggle_icon">chevron_left</span>
+            </button>
+          </div>
+          <div class="px-4 py-3 border-b border-border shrink-0 filtros-cuerpo" id="cg_panel"></div>
+          <div class="px-4 py-3 border-b border-border shrink-0 filtros-cuerpo">
+            <div class="filtro filtro-unico mb-0">
+              <label class="filtro-label">Colorear encuestados por</label>
+              <button type="button" class="kt-btn kt-btn-outline w-full justify-start filtro-btn" id="colorear_por_btn"></button>
+              <div class="filtro-lista" id="colorear_por_lista" role="listbox"></div>
+            </div>
+            <select id="colorear_por" hidden>
+              <option value="candidato">Candidato (respuesta más reciente)</option>
+              <option value="cambio">Cambio de opinión</option>
+              <option value="sexo">Sexo</option>
+              <option value="edad">Rango de edad</option>
+              <option value="confianza">Nivel de confianza de ubicación</option>
+            </select>
+          </div>
+          <div class="grow px-4 py-3 filtros-cuerpo" id="filtros"></div>
+          <div class="border-t border-border p-4 flex flex-col gap-2 shrink-0 filtros-cuerpo filtros-pie">
+            <button class="kt-btn kt-btn-outline w-full" id="reset">Quitar filtros</button>
+            <button class="kt-btn kt-btn-primary w-full" id="btnResumen">Generar resumen de encuesta</button>
+            <div id="contador"></div>
+          </div>
+        </div>
+        <!-- Mapa -->
+        <div class="grow relative" id="mapa_area">
+          <div id="map"></div>
+          <button type="button" class="vw-map-btn" id="guardar_vista_btn" title="Guardar una captura del mapa en Análisis manual" data-html2canvas-ignore="true">
+            <span class="material-symbols-outlined vw-ico-18">photo_camera</span><span>Guardar vista</span>
+          </button>
+          <div id="leyenda_color">
+            <div class="leyenda-color-cabecera" id="leyenda_color_toggle">
+              <span>Simbología</span>
+              <span class="material-symbols-outlined vw-ico-16" id="leyenda_color_toggle_icon">expand_less</span>
+            </div>
+            <div class="leyenda-color-cuerpo" id="leyenda_color_cuerpo"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de datos del Conglomerado (todas las columnas), refleja los filtros -->
+      <div class="border-t border-border shrink-0 bg-background" id="tabla_datos_panel">
+        <div class="w-full flex items-center justify-between gap-3 px-4 py-2">
+          <button type="button" class="grow flex items-center justify-between text-start text-sm font-medium text-foreground hover:opacity-75" id="tabla_datos_toggle">
+            <span id="tabla_datos_titulo">Tabla de datos</span>
+            <span class="material-symbols-outlined vw-ico-18" id="tabla_datos_toggle_icon">expand_more</span>
+          </button>
+          <button type="button" class="kt-btn kt-btn-sm kt-btn-outline shrink-0" id="tabla_datos_limpiar_sel_btn" style="display:none;">Quitar selección de filas (<span id="tabla_datos_contador_sel">0</span>)</button>
+          <button type="button" class="kt-btn kt-btn-sm kt-btn-outline shrink-0" id="tabla_descargar_btn" title="Descarga en su computadora las filas filtradas, con todas las columnas">Descargar tabla (CSV)</button>
+        </div>
+        <div id="tabla_datos_wrap">
+          <div class="tabla-datos-scroll">
+            <table id="tabla_datos" class="w-full">
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- End of Content -->
+  </div>
+  <!-- End of Wrapper -->
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/core.bundle.js"></script>
+<script src="assets/vendors/ktui/ktui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="datos/capas-arcgis-leaflet.js"></script>
+<script src="datos/mCUU1624.js"></script>
+<script src="datos/colonias.js"></script>
+<script src="datos/cerradas.js"></script>
+<script src="datos/conglomerado-rl.js"></script>
+<script src="app.js"></script>
+<script src="conglomerado.js"></script>
+<script src="analisis.js"></script>
+<script src="mapa.js"></script>
+</body>
+</html>

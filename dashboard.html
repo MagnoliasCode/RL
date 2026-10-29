@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="h-full" data-kt-theme="true" data-kt-theme-mode="light" lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard KPIs — Conglomerado RL Chihuahua</title>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<meta name="description" content="Indicadores de preferencia, evolución y perfil del Conglomerado RL.">
+<meta name="robots" content="noindex, nofollow">
+<link href="assets/media/app/favicon.ico" rel="shortcut icon">
+<link href="assets/vendors/apexcharts/apexcharts.css" rel="stylesheet">
+<link href="assets/css/styles.css" rel="stylesheet">
+<link href="assets/css/app.css" rel="stylesheet">
+<style>
+  .filtro-menu { width: 16rem; }
+  .filtro-lista-dd { max-height: 20rem; overflow-y: auto; }
+</style>
+<!-- Tema visual: va al final para tener prioridad -->
+<link href="assets/css/tema.css" rel="stylesheet">
+</head>
+<body class="antialiased flex h-full text-base text-foreground bg-background demo1 kt-sidebar-fixed kt-header-fixed">
+<script>
+  document.documentElement.classList.add('light');
+</script>
+
+<div class="flex grow" id="app_wrapper">
+  <!-- Sidebar -->
+  <div class="kt-sidebar fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
+    <div class="kt-sidebar-header hidden lg:flex relative shrink-0" id="sidebar_header">
+      <a class="vw-logo-block" href="index.html" title="Vernier — Consultoría Global y Estudios de Opinión">
+        <img src="assets/media/brand/vernier-logo-white.png" alt="Vernier">
+      </a>
+      <div class="vw-sidebar-code">
+        <span><span class="vw-dot"></span><span class="vw-label">CUU // Conglomerado RL</span></span>
+        <span class="vw-label">DL 12–18</span>
+      </div>
+      <button class="kt-btn kt-btn-icon size-[30px] absolute start-full z-40 -translate-x-2/4 -translate-y-2/4" data-kt-toggle="body" data-kt-toggle-class="kt-sidebar-collapse" id="sidebar_toggle" title="Contraer/expandir menú">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+    </div>
+    <div class="kt-sidebar-content flex grow shrink-0 py-5 pe-2" id="sidebar_content">
+      <div class="kt-scrollable-y-hover grow shrink-0 flex ps-2 lg:ps-5 pe-1 lg:pe-3" data-kt-scrollable="true" data-kt-scrollable-dependencies="#sidebar_header" data-kt-scrollable-height="auto" data-kt-scrollable-offset="0px" data-kt-scrollable-wrappers="#sidebar_content" id="sidebar_scrollable">
+        <div class="kt-menu flex flex-col grow" data-kt-menu="true" id="sidebar_menu">
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="index.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">radar</span></span>
+              <span class="kt-menu-title">Mapa interactivo</span>
+              <span class="vw-nav-num">01</span>
+            </a>
+          </div>
+          <div class="kt-menu-item active">
+            <a class="kt-menu-link items-center grow" href="dashboard.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">query_stats</span></span>
+              <span class="kt-menu-title">Dashboard KPIs</span>
+              <span class="vw-nav-num">02</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="resumen.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">menu_book</span></span>
+              <span class="kt-menu-title">Resumen y hallazgos</span>
+              <span class="vw-nav-num">03</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="migracion.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">swap_horiz</span></span>
+              <span class="kt-menu-title">Migración de opinión</span>
+              <span class="vw-nav-num">04</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="analisis.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">dashboard_customize</span></span>
+              <span class="kt-menu-title">Análisis manual</span>
+              <span class="vw-nav-num">05</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vw-sidebar-foot shrink-0">
+      <div class="vw-row"><span class="vw-label">Vernier // Estudios de opinión</span><span class="material-symbols-outlined vw-ico-16">tune</span></div>
+    </div>
+  </div>
+  <!-- End of Sidebar -->
+
+  <!-- Wrapper -->
+  <div class="kt-wrapper flex grow flex-col">
+    <!-- Header -->
+    <header class="kt-header fixed top-0 z-10 start-0 end-0 flex items-stretch shrink-0" data-kt-sticky="true" data-kt-sticky-name="header" id="header">
+      <div class="kt-container-fixed flex justify-between items-stretch gap-3 lg:gap-4" id="headerContainer">
+        <div class="flex gap-2.5 lg:hidden items-center -ms-1">
+          <button class="kt-btn kt-btn-icon kt-btn-ghost" data-kt-drawer-toggle="#sidebar">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+        <div class="vw-topbar-title grow">
+          <h2>/Dashboard KPIs</h2>
+          <span class="vw-label">Municipio de Chihuahua • Conglomerado RL</span>
+        </div>
+        <div class="flex items-center gap-2.5"></div>
+      </div>
+    </header>
+    <!-- End of Header -->
+
+    <!-- Content -->
+    <main class="grow pt-6 pb-8 vw-has-etching" id="content" role="content">
+      <!-- Grabado HUD de fondo (decorativo) -->
+      <div class="vw-etching" aria-hidden="true">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1"><circle cx="600" cy="400" r="380" stroke-dasharray="4 8"/><circle cx="600" cy="400" r="260"/><circle cx="600" cy="400" r="140" stroke-dasharray="2 6"/><line stroke-width=".8" x1="0" x2="1200" y1="400" y2="400"/><line stroke-width=".8" x1="600" x2="600" y1="0" y2="800"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="360" y2="360"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="440" y2="440"/><circle cx="280" cy="220" fill="currentColor" fill-opacity=".3" r="8"/><circle cx="920" cy="580" fill="currentColor" fill-opacity=".3" r="8"/></svg>
+      </div>
+
+      <div class="kt-container-fixed">
+        <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+          <div class="vw-section-head">
+            <div class="vw-eyebrow"><span class="vw-dot"></span><span class="vw-label">Sección 01 // Panorama</span></div>
+            <h1>/Dashboard KPIs</h1>
+            <p>Preferencia, evolución y perfil de las respuestas del Conglomerado RL en el municipio de Chihuahua.</p>
+          </div>
+          <div class="cg-pagina-panel w-full lg:w-auto" id="cg_panel"></div>
+        </div>
+      </div>
+
+      <div class="kt-container-fixed" id="d_contenido" hidden>
+        <div class="grid gap-5 lg:gap-7.5">
+          <div class="kt-card">
+            <div class="kt-card-content flex flex-wrap items-center gap-3 p-5">
+              <span class="vw-label vw-hud-label">Filtrar por //</span>
+              <div class="relative inline-flex" data-kt-dropdown="true" data-kt-dropdown-trigger="click">
+                <button type="button" class="kt-btn kt-btn-outline kt-btn-sm" data-kt-dropdown-toggle="true">
+                  Fecha
+                  <span class="kt-badge kt-badge-sm kt-badge-primary kt-badge-outline" id="f_hoja_badge">Todos</span>
+                  <span class="material-symbols-outlined vw-ico-16">expand_more</span>
+                </button>
+                <div class="kt-dropdown-menu hidden filtro-menu flex-col bg-background border border-border rounded-lg shadow-md p-3 gap-2" data-kt-dropdown-menu="true">
+                  <label class="flex items-center gap-2 pb-2 mb-1 border-b border-border">
+                    <input class="kt-checkbox kt-checkbox-sm" type="checkbox" id="f_hoja_todos">
+                    <span class="text-xs font-semibold text-mono">Seleccionar todo</span>
+                  </label>
+                  <div class="flex flex-col gap-1 filtro-lista-dd" id="f_hoja_lista"></div>
+                </div>
+              </div>
+              <div class="relative inline-flex" data-kt-dropdown="true" data-kt-dropdown-trigger="click">
+                <button type="button" class="kt-btn kt-btn-outline kt-btn-sm" data-kt-dropdown-toggle="true">
+                  Distrito local
+                  <span class="kt-badge kt-badge-sm kt-badge-primary kt-badge-outline" id="f_dl_badge">Todos</span>
+                  <span class="material-symbols-outlined vw-ico-16">expand_more</span>
+                </button>
+                <div class="kt-dropdown-menu hidden filtro-menu flex-col bg-background border border-border rounded-lg shadow-md p-3 gap-2" data-kt-dropdown-menu="true">
+                  <label class="flex items-center gap-2 pb-2 mb-1 border-b border-border">
+                    <input class="kt-checkbox kt-checkbox-sm" type="checkbox" id="f_dl_todos">
+                    <span class="text-xs font-semibold text-mono">Seleccionar todo</span>
+                  </label>
+                  <div class="flex flex-col gap-1 filtro-lista-dd" id="f_dl_lista"></div>
+                </div>
+              </div>
+              <div class="relative inline-flex" data-kt-dropdown="true" data-kt-dropdown-trigger="click">
+                <button type="button" class="kt-btn kt-btn-outline kt-btn-sm" data-kt-dropdown-toggle="true">
+                  Distrito federal
+                  <span class="kt-badge kt-badge-sm kt-badge-primary kt-badge-outline" id="f_df_badge">Todos</span>
+                  <span class="material-symbols-outlined vw-ico-16">expand_more</span>
+                </button>
+                <div class="kt-dropdown-menu hidden filtro-menu flex-col bg-background border border-border rounded-lg shadow-md p-3 gap-2" data-kt-dropdown-menu="true">
+                  <label class="flex items-center gap-2 pb-2 mb-1 border-b border-border">
+                    <input class="kt-checkbox kt-checkbox-sm" type="checkbox" id="f_df_todos">
+                    <span class="text-xs font-semibold text-mono">Seleccionar todo</span>
+                  </label>
+                  <div class="flex flex-col gap-1 filtro-lista-dd" id="f_df_lista"></div>
+                </div>
+              </div>
+              <div class="relative inline-flex" data-kt-dropdown="true" data-kt-dropdown-trigger="click">
+                <button type="button" class="kt-btn kt-btn-outline kt-btn-sm" data-kt-dropdown-toggle="true">
+                  Emparejamiento
+                  <span class="kt-badge kt-badge-sm kt-badge-primary kt-badge-outline" id="f_emp_badge">Todos</span>
+                  <span class="material-symbols-outlined vw-ico-16">expand_more</span>
+                </button>
+                <div class="kt-dropdown-menu hidden filtro-menu flex-col bg-background border border-border rounded-lg shadow-md p-3 gap-2" data-kt-dropdown-menu="true">
+                  <label class="flex items-center gap-2 pb-2 mb-1 border-b border-border">
+                    <input class="kt-checkbox kt-checkbox-sm" type="checkbox" id="f_emp_todos">
+                    <span class="text-xs font-semibold text-mono">Seleccionar todo</span>
+                  </label>
+                  <div class="flex flex-col gap-1 filtro-lista-dd" id="f_emp_lista"></div>
+                </div>
+              </div>
+              <button type="button" class="kt-btn kt-btn-outline kt-btn-sm ms-auto" id="f_reset">Quitar filtros</button>
+            </div>
+          </div>
+
+          <div class="kt-card">
+            <div class="kt-card-content kpi-row p-0">
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Respuestas</span><span id="k_respuestas">-</span><span id="k_respuestas_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Teléfonos (una persona)</span><span id="k_telefonos">-</span><span id="k_telefonos_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Emparejados con persona</span><span id="k_emparejados">-</span><span id="k_emparejados_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Líder</span><span id="k_lider">-</span><span id="k_lider_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Cambiaron de opinión</span><span id="k_cambian">-</span><span id="k_cambian_sub">-</span></div>
+            </div>
+          </div>
+          <div class="kt-card p-6" id="d_vacio" hidden><p class="vw-nota-metodo">No hay respuestas con estos filtros.</p></div>
+
+          <div class="grid lg:grid-cols-2 gap-5 lg:gap-7.5 items-stretch">
+            <div class="kt-card h-full">
+              <div class="kt-card-header"><h3 class="kt-card-title">Preferencia por candidato</h3></div>
+              <div class="kt-card-content"><div id="ch_pref"></div></div>
+            </div>
+            <div class="kt-card h-full">
+              <div class="kt-card-header"><h3 class="kt-card-title">Evolución por fecha (% de cada fecha)</h3></div>
+              <div class="kt-card-content"><div id="ch_evol"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kt-container-fixed pt-8" id="d_contenido_2" hidden>
+        <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+          <div class="vw-section-head">
+            <div class="vw-eyebrow"><span class="vw-dot"></span><span class="vw-label">Sección 02 // Territorio y perfil</span></div>
+            <h1>/Preferencia por segmento</h1>
+            <p>Respuestas emparejadas con una persona (las que tienen distrito, sexo y edad).</p>
+          </div>
+        </div>
+        <div class="grid gap-5 lg:gap-7.5">
+          <p class="vw-nota-metodo" id="nota_perfil" hidden>Ninguna respuesta filtrada está emparejada: no hay datos de distrito ni de perfil.</p>
+          <div class="grid lg:grid-cols-2 gap-5 lg:gap-7.5 items-stretch">
+            <div class="kt-card h-full"><div class="kt-card-header"><h3 class="kt-card-title">Por distrito local</h3></div><div class="kt-card-content"><div id="ch_dl"></div></div></div>
+            <div class="kt-card h-full"><div class="kt-card-header"><h3 class="kt-card-title">Por distrito federal</h3></div><div class="kt-card-content"><div id="ch_df"></div></div></div>
+          </div>
+          <div class="grid lg:grid-cols-2 gap-5 lg:gap-7.5 items-stretch">
+            <div class="kt-card h-full"><div class="kt-card-header"><h3 class="kt-card-title">Por sexo</h3></div><div class="kt-card-content"><div id="ch_sexo"></div></div></div>
+            <div class="kt-card h-full"><div class="kt-card-header"><h3 class="kt-card-title">Por rango de edad</h3></div><div class="kt-card-content"><div id="ch_edad"></div></div></div>
+          </div>
+          <div class="kt-card">
+            <div class="kt-card-header"><h3 class="kt-card-title">Perfil por candidato</h3></div>
+            <div class="kt-card-content vw-scroll-x">
+              <table class="vw-tabla" id="t_perfil">
+                <thead><tr><th>Candidato</th><th class="num">Respuestas</th><th class="num">Emparejadas</th><th class="num">Mujeres*</th><th class="num">Edad mediana*</th><th class="num">Servidores públicos*</th><th class="num">Beneficiarios*</th><th class="num">Cambió de opinión</th></tr></thead>
+                <tbody></tbody>
+              </table>
+              <p class="vw-nota-metodo mt-3">* Sobre las respuestas emparejadas con una persona.</p>
+            </div>
+          </div>
+          <div class="kt-card">
+            <div class="kt-card-header"><h3 class="kt-card-title">Emparejamiento por fecha</h3></div>
+            <div class="kt-card-content"><div id="ch_emp"></div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- End of Content -->
+  </div>
+  <!-- End of Wrapper -->
+</div>
+
+<script src="assets/js/core.bundle.js"></script>
+<script src="assets/vendors/ktui/ktui.min.js"></script>
+<script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="datos/conglomerado-rl.js"></script>
+<script src="app.js"></script>
+<script src="conglomerado.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

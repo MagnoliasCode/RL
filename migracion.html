@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="h-full" data-kt-theme="true" data-kt-theme-mode="light" lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Migración de opinión — Conglomerado RL Chihuahua</title>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<meta name="description" content="Personas que cambiaron de opinión entre fechas de levantamiento.">
+<meta name="robots" content="noindex, nofollow">
+<link href="assets/media/app/favicon.ico" rel="shortcut icon">
+
+<link href="assets/css/styles.css" rel="stylesheet">
+<link href="assets/css/app.css" rel="stylesheet">
+<!-- Tema visual: va al final para tener prioridad -->
+<link href="assets/css/tema.css" rel="stylesheet">
+</head>
+<body class="antialiased flex h-full text-base text-foreground bg-background demo1 kt-sidebar-fixed kt-header-fixed">
+<script>
+  document.documentElement.classList.add('light');
+</script>
+
+<div class="flex grow" id="app_wrapper">
+  <!-- Sidebar -->
+  <div class="kt-sidebar fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
+    <div class="kt-sidebar-header hidden lg:flex relative shrink-0" id="sidebar_header">
+      <a class="vw-logo-block" href="index.html" title="Vernier — Consultoría Global y Estudios de Opinión">
+        <img src="assets/media/brand/vernier-logo-white.png" alt="Vernier">
+      </a>
+      <div class="vw-sidebar-code">
+        <span><span class="vw-dot"></span><span class="vw-label">CUU // Conglomerado RL</span></span>
+        <span class="vw-label">DL 12–18</span>
+      </div>
+      <button class="kt-btn kt-btn-icon size-[30px] absolute start-full z-40 -translate-x-2/4 -translate-y-2/4" data-kt-toggle="body" data-kt-toggle-class="kt-sidebar-collapse" id="sidebar_toggle" title="Contraer/expandir menú">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+    </div>
+    <div class="kt-sidebar-content flex grow shrink-0 py-5 pe-2" id="sidebar_content">
+      <div class="kt-scrollable-y-hover grow shrink-0 flex ps-2 lg:ps-5 pe-1 lg:pe-3" data-kt-scrollable="true" data-kt-scrollable-dependencies="#sidebar_header" data-kt-scrollable-height="auto" data-kt-scrollable-offset="0px" data-kt-scrollable-wrappers="#sidebar_content" id="sidebar_scrollable">
+        <div class="kt-menu flex flex-col grow" data-kt-menu="true" id="sidebar_menu">
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="index.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">radar</span></span>
+              <span class="kt-menu-title">Mapa interactivo</span>
+              <span class="vw-nav-num">01</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="dashboard.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">query_stats</span></span>
+              <span class="kt-menu-title">Dashboard KPIs</span>
+              <span class="vw-nav-num">02</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="resumen.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">menu_book</span></span>
+              <span class="kt-menu-title">Resumen y hallazgos</span>
+              <span class="vw-nav-num">03</span>
+            </a>
+          </div>
+          <div class="kt-menu-item active">
+            <a class="kt-menu-link items-center grow" href="migracion.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">swap_horiz</span></span>
+              <span class="kt-menu-title">Migración de opinión</span>
+              <span class="vw-nav-num">04</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="analisis.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">dashboard_customize</span></span>
+              <span class="kt-menu-title">Análisis manual</span>
+              <span class="vw-nav-num">05</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vw-sidebar-foot shrink-0">
+      <div class="vw-row"><span class="vw-label">Vernier // Estudios de opinión</span><span class="material-symbols-outlined vw-ico-16">tune</span></div>
+    </div>
+  </div>
+  <!-- End of Sidebar -->
+
+  <!-- Wrapper -->
+  <div class="kt-wrapper flex grow flex-col">
+    <!-- Header -->
+    <header class="kt-header fixed top-0 z-10 start-0 end-0 flex items-stretch shrink-0" data-kt-sticky="true" data-kt-sticky-name="header" id="header">
+      <div class="kt-container-fixed flex justify-between items-stretch gap-3 lg:gap-4" id="headerContainer">
+        <div class="flex gap-2.5 lg:hidden items-center -ms-1">
+          <button class="kt-btn kt-btn-icon kt-btn-ghost" data-kt-drawer-toggle="#sidebar">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+        <div class="vw-topbar-title grow">
+          <h2>/Migración de opinión</h2>
+          <span class="vw-label">Municipio de Chihuahua • Conglomerado RL</span>
+        </div>
+        <div class="flex items-center gap-2.5"></div>
+      </div>
+    </header>
+    <!-- End of Header -->
+
+    <!-- Content -->
+    <main class="grow pt-6 pb-8 vw-has-etching" id="content" role="content">
+      <!-- Grabado HUD de fondo (decorativo) -->
+      <div class="vw-etching" aria-hidden="true">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1"><circle cx="600" cy="400" r="380" stroke-dasharray="4 8"/><circle cx="600" cy="400" r="260"/><circle cx="600" cy="400" r="140" stroke-dasharray="2 6"/><line stroke-width=".8" x1="0" x2="1200" y1="400" y2="400"/><line stroke-width=".8" x1="600" x2="600" y1="0" y2="800"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="360" y2="360"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="440" y2="440"/><circle cx="280" cy="220" fill="currentColor" fill-opacity=".3" r="8"/><circle cx="920" cy="580" fill="currentColor" fill-opacity=".3" r="8"/></svg>
+      </div>
+
+      <div class="kt-container-fixed">
+        <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+          <div class="vw-section-head">
+            <div class="vw-eyebrow"><span class="vw-dot"></span><span class="vw-label">Seguimiento // Nombre de la hoja</span></div>
+            <h1>/Migración de opinión</h1>
+            <p>Personas que opinaron distinto en fechas distintas: su ficha, cada fecha en que opinaron y por quién.</p>
+          </div>
+          <div class="cg-pagina-panel w-full lg:w-auto" id="cg_panel"></div>
+        </div>
+      </div>
+
+      <div class="kt-container-fixed" id="m_contenido" hidden>
+        <div class="grid gap-5 lg:gap-7.5">
+          <div class="kt-card">
+            <div class="kt-card-content kpi-row p-0">
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Encuestados en varias fechas</span><span id="k_varias">-</span><span id="k_varias_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Cambiaron de opinión</span><span id="k_cambian">-</span><span id="k_cambian_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Con nombre</span><span id="k_nombre">-</span><span id="k_nombre_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Intensidad</span><span id="k_pasos">-</span><span id="k_pasos_sub">-</span></div>
+              <div class="flex-1 flex flex-col gap-1 p-5"><span>Pasaron por 3+ candidatos</span><span id="k_tres">-</span><span>Opinión muy volátil</span></div>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-5 gap-5 lg:gap-7.5 items-start">
+            <div class="kt-card lg:col-span-3">
+              <div class="kt-card-header"><h3 class="kt-card-title">De la primera a la última opinión</h3></div>
+              <div class="kt-card-content vw-scroll-x" id="matriz"></div>
+            </div>
+            <div class="kt-card lg:col-span-2">
+              <div class="kt-card-header"><h3 class="kt-card-title">Balance por candidato</h3></div>
+              <div class="kt-card-content vw-scroll-x">
+                <table class="vw-tabla" id="t_balance">
+                  <thead><tr><th>Candidato</th><th class="num">Pasaron por él</th><th class="num">Ganó</th><th class="num">Perdió</th><th class="num">Neto</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+                <p class="vw-nota-metodo mt-3">Ganó: su última opinión es este candidato y la primera no. Perdió: al revés.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="kt-card">
+            <div class="kt-card-content flex flex-col gap-3 p-5">
+              <div class="mg-filtros">
+                <input type="search" id="f_texto" placeholder="Buscar nombre, teléfono, CURP, colonia o sección">
+                <select id="f_emp"><option value="">Con y sin ficha</option><option value="si">Solo con nombre (emparejados)</option><option value="no">Solo teléfono</option></select>
+                <select id="f_primera"></select>
+                <select id="f_ultima"></select>
+                <select id="f_paso"></select>
+                <select id="f_dl"></select>
+                <select id="f_df"></select>
+                <select id="f_orden"><option value="ficha">Ordenar: con ficha primero</option><option value="cambios">Ordenar: más cambios</option><option value="nombre">Ordenar: nombre</option></select>
+              </div>
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <span class="vw-label" id="conteo"></span>
+                <button type="button" class="kt-btn kt-btn-sm kt-btn-outline" id="descargar" title="Descarga en su computadora la lista filtrada con fichas y trayectorias">Descargar lista (CSV)</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mg-lista" id="lista"></div>
+          <button type="button" class="kt-btn kt-btn-primary mx-auto" id="mas" hidden>Mostrar más</button>
+        </div>
+      </div>
+    </main>
+    <!-- End of Content -->
+  </div>
+  <!-- End of Wrapper -->
+</div>
+
+<script src="assets/js/core.bundle.js"></script>
+<script src="assets/vendors/ktui/ktui.min.js"></script>
+<script src="datos/conglomerado-rl.js"></script>
+<script src="app.js"></script>
+<script src="conglomerado.js"></script>
+<script src="migracion.js"></script>
+</body>
+</html>

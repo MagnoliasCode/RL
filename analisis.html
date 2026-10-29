@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="h-full" data-kt-theme="true" data-kt-theme-mode="light" lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Análisis manual — Conglomerado RL Chihuahua</title>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<meta name="description" content="Bloques de análisis guardados desde el mapa interactivo, con exportación a PDF.">
+<meta name="robots" content="noindex, nofollow">
+<link href="assets/media/app/favicon.ico" rel="shortcut icon">
+
+<link href="assets/css/styles.css" rel="stylesheet">
+<link href="assets/css/app.css" rel="stylesheet">
+<!-- Tema visual: va al final para tener prioridad -->
+<link href="assets/css/tema.css" rel="stylesheet">
+</head>
+<body class="antialiased flex h-full text-base text-foreground bg-background demo1 kt-sidebar-fixed kt-header-fixed">
+<script>
+  document.documentElement.classList.add('light');
+</script>
+
+<div class="flex grow" id="app_wrapper">
+  <!-- Sidebar -->
+  <div class="kt-sidebar fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0 [--kt-drawer-enable:true] lg:[--kt-drawer-enable:false]" data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
+    <div class="kt-sidebar-header hidden lg:flex relative shrink-0" id="sidebar_header">
+      <a class="vw-logo-block" href="index.html" title="Vernier — Consultoría Global y Estudios de Opinión">
+        <img src="assets/media/brand/vernier-logo-white.png" alt="Vernier">
+      </a>
+      <div class="vw-sidebar-code">
+        <span><span class="vw-dot"></span><span class="vw-label">CUU // Conglomerado RL</span></span>
+        <span class="vw-label">DL 12–18</span>
+      </div>
+      <button class="kt-btn kt-btn-icon size-[30px] absolute start-full z-40 -translate-x-2/4 -translate-y-2/4" data-kt-toggle="body" data-kt-toggle-class="kt-sidebar-collapse" id="sidebar_toggle" title="Contraer/expandir menú">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </button>
+    </div>
+    <div class="kt-sidebar-content flex grow shrink-0 py-5 pe-2" id="sidebar_content">
+      <div class="kt-scrollable-y-hover grow shrink-0 flex ps-2 lg:ps-5 pe-1 lg:pe-3" data-kt-scrollable="true" data-kt-scrollable-dependencies="#sidebar_header" data-kt-scrollable-height="auto" data-kt-scrollable-offset="0px" data-kt-scrollable-wrappers="#sidebar_content" id="sidebar_scrollable">
+        <div class="kt-menu flex flex-col grow" data-kt-menu="true" id="sidebar_menu">
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="index.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">radar</span></span>
+              <span class="kt-menu-title">Mapa interactivo</span>
+              <span class="vw-nav-num">01</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="dashboard.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">query_stats</span></span>
+              <span class="kt-menu-title">Dashboard KPIs</span>
+              <span class="vw-nav-num">02</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="resumen.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">menu_book</span></span>
+              <span class="kt-menu-title">Resumen y hallazgos</span>
+              <span class="vw-nav-num">03</span>
+            </a>
+          </div>
+          <div class="kt-menu-item">
+            <a class="kt-menu-link items-center grow" href="migracion.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">swap_horiz</span></span>
+              <span class="kt-menu-title">Migración de opinión</span>
+              <span class="vw-nav-num">04</span>
+            </a>
+          </div>
+          <div class="kt-menu-item active">
+            <a class="kt-menu-link items-center grow" href="analisis.html">
+              <span class="kt-menu-icon items-start"><span class="material-symbols-outlined">dashboard_customize</span></span>
+              <span class="kt-menu-title">Análisis manual</span>
+              <span class="vw-nav-num">05</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vw-sidebar-foot shrink-0">
+      <div class="vw-row"><span class="vw-label">Vernier // Estudios de opinión</span><span class="material-symbols-outlined vw-ico-16">tune</span></div>
+    </div>
+  </div>
+  <!-- End of Sidebar -->
+
+  <!-- Wrapper -->
+  <div class="kt-wrapper flex grow flex-col">
+    <!-- Header -->
+    <header class="kt-header fixed top-0 z-10 start-0 end-0 flex items-stretch shrink-0" data-kt-sticky="true" data-kt-sticky-name="header" id="header">
+      <div class="kt-container-fixed flex justify-between items-stretch gap-3 lg:gap-4" id="headerContainer">
+        <div class="flex gap-2.5 lg:hidden items-center -ms-1">
+          <button class="kt-btn kt-btn-icon kt-btn-ghost" data-kt-drawer-toggle="#sidebar">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+        <div class="vw-topbar-title grow">
+          <h2>/Análisis manual</h2>
+          <span class="vw-label">Municipio de Chihuahua • Conglomerado RL</span>
+        </div>
+        <div class="flex items-center gap-2.5"></div>
+      </div>
+    </header>
+    <!-- End of Header -->
+
+    <!-- Content -->
+    <main class="grow pt-6 pb-8 vw-has-etching" id="content" role="content">
+
+      <!-- Grabado HUD de fondo (decorativo) -->
+      <div class="vw-etching" aria-hidden="true">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1"><circle cx="600" cy="400" r="380" stroke-dasharray="4 8"/><circle cx="600" cy="400" r="260"/><circle cx="600" cy="400" r="140" stroke-dasharray="2 6"/><line stroke-width=".8" x1="0" x2="1200" y1="400" y2="400"/><line stroke-width=".8" x1="600" x2="600" y1="0" y2="800"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="360" y2="360"/><line stroke-dasharray="6 12" stroke-width=".5" x1="100" x2="1100" y1="440" y2="440"/><circle cx="280" cy="220" fill="currentColor" fill-opacity=".3" r="8"/><circle cx="920" cy="580" fill="currentColor" fill-opacity=".3" r="8"/></svg>
+      </div>
+
+      <div class="kt-container-fixed">
+        <div class="flex flex-wrap items-end justify-between gap-5 pb-7.5">
+          <div class="vw-section-head">
+            <div class="vw-eyebrow"><span class="vw-dot"></span><span class="vw-label">Bitácora // Bloques guardados</span></div>
+            <h1>/Análisis manual</h1>
+            <p>Resúmenes y vistas guardados desde el mapa interactivo. Arrastre los bloques por su manija para reordenarlos. Se conservan en este navegador.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="vw-counter"><span class="vw-dot"></span><span id="am_contador">0 bloques</span></span>
+            <button type="button" class="kt-btn kt-btn-outline am-guardar-orden" id="am_guardar_orden" disabled title="Guardar el orden actual; la exportación usa el orden guardado">
+              <span class="material-symbols-outlined vw-ico-18">save</span>
+              <span>Guardar orden</span>
+            </button>
+            <button type="button" class="kt-btn kt-btn-primary" id="am_exportar">
+              <span class="material-symbols-outlined vw-ico-18">picture_as_pdf</span>
+              <span id="am_exportar_texto">Exportar</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="kt-container-fixed">
+        <div class="am-grid" id="am_grid"></div>
+
+        <!-- Estado vacio -->
+        <div class="kt-card am-vacio" id="am_vacio" hidden>
+          <span class="material-symbols-outlined am-vacio-icono">dashboard_customize</span>
+          <h3 class="kt-card-title">Aún no hay bloques guardados</h3>
+          <p>En el mapa interactivo, genere un resumen de encuesta o de secciones, o use <b>Guardar vista</b>, y presione <b>Guardar</b> para agregarlo aquí.</p>
+          <a class="kt-btn kt-btn-primary" href="index.html"><span class="material-symbols-outlined vw-ico-18">radar</span>Ir al mapa interactivo</a>
+        </div>
+      </div>
+    </main>
+    <!-- End of Content -->
+  </div>
+  <!-- End of Wrapper -->
+</div>
+
+<script src="assets/js/core.bundle.js"></script>
+<script src="assets/vendors/ktui/ktui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="analisis.js"></script>
+<script>
+  var grid = document.getElementById('am_grid');
+  var botonGuardarOrden = document.getElementById('am_guardar_orden');
+
+  function etiquetaBloque(indice, origen) {
+    return 'Bloque ' + String(indice + 1).padStart(2, '0') + ' // ' + origen;
+  }
+
+  // Encabezado comun (pod oscuro) y meta de un bloque; lo usan la tarjeta de la hoja y el cuadro del PDF
+  function crearCabecera(bloque, indice) {
+    var cabecera = document.createElement('div');
+    cabecera.className = 'am-bloque-cabecera';
+    var titulos = document.createElement('div');
+    titulos.className = 'am-bloque-titulos';
+    var eyebrow = document.createElement('span');
+    eyebrow.className = 'vw-label am-bloque-eyebrow';
+    eyebrow.textContent = etiquetaBloque(indice, bloque.origen);
+    var titulo = document.createElement('h3');
+    titulo.textContent = bloque.titulo;
+    titulos.appendChild(eyebrow);
+    titulos.appendChild(titulo);
+    cabecera.appendChild(titulos);
+    return cabecera;
+  }
+
+  function crearMeta(bloque) {
+    var meta = document.createElement('div');
+    meta.className = 'am-bloque-meta';
+    var fecha = document.createElement('span');
+    fecha.className = 'vw-label';
+    fecha.textContent = 'Guardado ' + AM.formatearFecha(bloque.fecha);
+    meta.appendChild(fecha);
+    if (bloque.contexto) {
+      var contexto = document.createElement('span');
+      contexto.className = 'am-bloque-contexto';
+      contexto.textContent = bloque.contexto;
+      meta.appendChild(contexto);
+    }
+    return meta;
+  }
+
+  // El contenido proviene de las ventanas de resumen y capturas generadas por index.html
+  function crearCuerpo(bloque) {
+    var cuerpo = document.createElement('div');
+    cuerpo.className = 'am-bloque-cuerpo';
+    cuerpo.innerHTML = bloque.html;
+    return cuerpo;
+  }
+
+  // ---- Tarjetas de la hoja ----
+  function crearTarjeta(bloque, indice) {
+    var tarjeta = document.createElement('article');
+    tarjeta.className = 'am-bloque';
+    tarjeta.dataset.id = bloque.id;
+    tarjeta.dataset.origen = bloque.origen;
+
+    var cabecera = crearCabecera(bloque, indice);
+    var acciones = document.createElement('div');
+    acciones.className = 'am-bloque-acciones';
+
+    var manija = document.createElement('button');
+    manija.type = 'button';
+    manija.className = 'am-manija';
+    manija.title = 'Arrastrar para reordenar';
+    manija.setAttribute('aria-label', 'Arrastrar para reordenar');
+    manija.innerHTML = '<span class="material-symbols-outlined vw-ico-18">drag_indicator</span>';
+    // Solo la manija inicia el arrastre, para no interferir con la seleccion de texto de la tarjeta
+    manija.addEventListener('mousedown', function () { tarjeta.draggable = true; });
+    manija.addEventListener('mouseup', function () { tarjeta.draggable = false; });
+
+    var eliminar = document.createElement('button');
+    eliminar.type = 'button';
+    eliminar.className = 'am-eliminar';
+    eliminar.title = 'Eliminar bloque';
+    eliminar.innerHTML = '<span class="material-symbols-outlined vw-ico-16">delete</span><span>Eliminar</span>';
+    eliminar.addEventListener('click', function () {
+      AM.modalConfirmar('Eliminar bloque', '¿Eliminar "' + bloque.titulo + '" de Análisis manual? Esta acción no se puede deshacer.', 'Eliminar', function () {
+        AM.eliminar(bloque.id);
+        tarjeta.remove();
+        renumerar();
+        actualizarEstado();
+        AM.aviso('Bloque eliminado.');
+      });
+    });
+
+    acciones.appendChild(manija);
+    acciones.appendChild(eliminar);
+    cabecera.appendChild(acciones);
+
+    tarjeta.appendChild(cabecera);
+    tarjeta.appendChild(crearMeta(bloque));
+    tarjeta.appendChild(crearCuerpo(bloque));
+    return tarjeta;
+  }
+
+  function idsEnPantalla() {
+    return Array.from(grid.querySelectorAll('.am-bloque')).map(function (t) { return t.dataset.id; });
+  }
+
+  function ordenSinGuardar() {
+    return idsEnPantalla().join('|') !== AM.cargar().map(function (b) { return b.id; }).join('|');
+  }
+
+  function renumerar() {
+    grid.querySelectorAll('.am-bloque').forEach(function (t, i) {
+      t.querySelector('.am-bloque-eyebrow').textContent = etiquetaBloque(i, t.dataset.origen);
+    });
+  }
+
+  function actualizarEstado() {
+    var n = grid.querySelectorAll('.am-bloque').length;
+    document.getElementById('am_vacio').hidden = n > 0;
+    document.getElementById('am_contador').textContent = n + (n === 1 ? ' bloque' : ' bloques');
+    document.getElementById('am_exportar').disabled = n === 0;
+    var pendiente = n > 0 && ordenSinGuardar();
+    botonGuardarOrden.disabled = !pendiente;
+    botonGuardarOrden.classList.toggle('am-guardar-orden-pendiente', pendiente);
+  }
+
+  function pintarBloques() {
+    grid.innerHTML = '';
+    AM.cargar().forEach(function (b, i) { grid.appendChild(crearTarjeta(b, i)); });
+    actualizarEstado();
+  }
+
+  // ---- Arrastrar para reordenar ----
+  var arrastrada = null;
+
+  grid.addEventListener('dragstart', function (e) {
+    arrastrada = e.target.closest('.am-bloque');
+    if (!arrastrada) return;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', arrastrada.dataset.id);
+    setTimeout(function () { if (arrastrada) arrastrada.classList.add('am-arrastrando'); }, 0);
+  });
+
+  grid.addEventListener('dragover', function (e) {
+    if (!arrastrada) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    var destino = e.target.closest('.am-bloque');
+    if (!destino) {
+      // Espacio libre de la cuadricula despues del ultimo bloque
+      var ultima = grid.lastElementChild;
+      if (ultima && ultima !== arrastrada) {
+        var r = ultima.getBoundingClientRect();
+        if (e.clientY > r.top && (e.clientY > r.bottom || e.clientX > r.right)) grid.appendChild(arrastrada);
+      }
+      return;
+    }
+    if (destino === arrastrada) return;
+    var rect = destino.getBoundingClientRect();
+    var antes = e.clientX < rect.left + rect.width / 2;
+    grid.insertBefore(arrastrada, antes ? destino : destino.nextSibling);
+  });
+
+  grid.addEventListener('drop', function (e) { e.preventDefault(); });
+
+  grid.addEventListener('dragend', function () {
+    if (!arrastrada) return;
+    arrastrada.classList.remove('am-arrastrando');
+    arrastrada.draggable = false;
+    arrastrada = null;
+    renumerar();
+    actualizarEstado();
+  });
+
+  botonGuardarOrden.addEventListener('click', function () {
+    if (AM.reordenar(idsEnPantalla())) {
+      pintarBloques();
+      AM.aviso('Orden guardado. La exportación usará este orden.');
+    } else {
+      AM.aviso('No se pudo guardar el orden.', null, true);
+    }
+  });
+
+  // Advertencia al salir con un orden sin guardar
+  window.addEventListener('beforeunload', function (e) {
+    if (!botonGuardarOrden.disabled) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  // Si se guardan bloques desde el mapa en otra pestaña, se agregan; no se pisa un orden sin guardar
+  window.addEventListener('storage', function () {
+    if (botonGuardarOrden.disabled) pintarBloques(); else actualizarEstado();
+  });
+
+  // ---- Exportar PDF: A4 horizontal, hasta 2 cuadros 1:1 por pagina, uno junto al otro ----
+  var PDF = {
+    anchoPx: 1123, altoPx: 794,   // A4 horizontal a 96 dpi
+    anchoMm: 297, altoMm: 210,
+    margen: 36, separacion: 20,
+    altoCabecera: 82, altoPie: 34, // reservas verticales para la cabecera de marca y el pie
+    porPagina: 2, escalaMax: 2, escalaMin: 0.25
+  };
+  // El lado del cuadro es el menor entre el ancho disponible para dos columnas y el alto libre
+  PDF.lado = Math.floor(Math.min(
+    (PDF.anchoPx - PDF.margen * 2 - PDF.separacion) / 2,
+    PDF.altoPx - PDF.margen * 2 - PDF.altoCabecera - PDF.separacion - PDF.altoPie
+  ));
+
+  // Ajusta el contenido al recuadro disponible: lo escala (hacia arriba o abajo) y lo ensancha
+  // al escalar hacia abajo para que tablas y barras aprovechen el cuadro sin desbordarse
+  function ajustarAlCuadro(caja, interior) {
+    var anchoCaja = caja.clientWidth, altoCaja = caja.clientHeight;
+    var escala = 1;
+    for (var i = 0; i < 8; i++) {
+      // Ancho de maquetacion tal que, ya escalado, el contenido ocupe todo el ancho del cuadro
+      interior.style.width = (anchoCaja / escala) + 'px';
+      var nueva = Math.min(altoCaja / interior.scrollHeight, anchoCaja / interior.scrollWidth);
+      nueva = Math.max(PDF.escalaMin, Math.min(PDF.escalaMax, nueva));
+      if (Math.abs(nueva - escala) < 0.005) break;
+      escala = (escala + nueva) / 2; // amortiguado para evitar oscilar entre dos anchos
+    }
+    interior.style.width = (anchoCaja / escala) + 'px';
+    // Ajuste final: garantiza que nada se salga del cuadro
+    var final = Math.max(PDF.escalaMin, Math.min(escala, altoCaja / interior.scrollHeight, anchoCaja / interior.scrollWidth));
+    interior.style.transform = 'scale(' + final + ')';
+    // Centra el contenido en el cuadro si sobra espacio
+    var sobraAncho = anchoCaja - interior.scrollWidth * final;
+    var sobraAlto = altoCaja - interior.scrollHeight * final;
+    if (sobraAncho > 1) interior.style.left = (sobraAncho / 2) + 'px';
+    if (sobraAlto > 1) interior.style.top = (sobraAlto / 2) + 'px';
+  }
+
+  function crearCuadroPDF(bloque, indice) {
+    var cuadro = document.createElement('div');
+    cuadro.className = 'am-pdf-cuadro';
+    cuadro.style.width = cuadro.style.height = PDF.lado + 'px';
+    cuadro.appendChild(crearCabecera(bloque, indice));
+    cuadro.appendChild(crearMeta(bloque));
+    var caja = document.createElement('div');
+    caja.className = 'am-pdf-caja';
+    var interior = crearCuerpo(bloque);
+    interior.classList.add('am-pdf-interior');
+    caja.appendChild(interior);
+    cuadro.appendChild(caja);
+    return cuadro;
+  }
+
+  function crearPaginaPDF(bloques, desde, numPagina, totalPaginas, totalBloques) {
+    var pagina = document.createElement('div');
+    pagina.className = 'am-pdf-pagina';
+    pagina.style.width = PDF.anchoPx + 'px';
+    pagina.style.height = PDF.altoPx + 'px';
+    pagina.style.padding = PDF.margen + 'px';
+
+    var cabecera = document.createElement('div');
+    cabecera.className = 'am-pdf-cabecera';
+    cabecera.innerHTML = '<div><span class="vw-label am-export-eyebrow">Vernier // Consultoría Global y Estudios de Opinión</span><h1>/Análisis manual</h1></div>';
+    var meta = document.createElement('div');
+    meta.className = 'am-export-meta';
+    meta.innerHTML = '<span class="vw-label">Municipio de Chihuahua • Conglomerado RL</span>';
+    var detalle = document.createElement('span');
+    detalle.className = 'vw-label';
+    detalle.textContent = totalBloques + (totalBloques === 1 ? ' bloque' : ' bloques') + ' • Exportado ' + AM.formatearFecha(new Date().toISOString());
+    meta.appendChild(detalle);
+    cabecera.appendChild(meta);
+
+    var rejilla = document.createElement('div');
+    rejilla.className = 'am-pdf-rejilla';
+    rejilla.style.gap = PDF.separacion + 'px';
+    rejilla.style.gridTemplateColumns = 'repeat(2, ' + PDF.lado + 'px)';
+    rejilla.style.justifyContent = 'center';
+    bloques.forEach(function (b, j) { rejilla.appendChild(crearCuadroPDF(b, desde + j)); });
+
+    var pie = document.createElement('div');
+    pie.className = 'am-pdf-pie vw-label';
+    pie.innerHTML = '<span>Vernier</span>';
+    var numero = document.createElement('span');
+    numero.textContent = 'Página ' + numPagina + ' de ' + totalPaginas;
+    pie.appendChild(numero);
+
+    pagina.appendChild(cabecera);
+    pagina.appendChild(rejilla);
+    pagina.appendChild(pie);
+    return pagina;
+  }
+
+  function exportarPDF(bloques) {
+    var escenario = document.createElement('div');
+    escenario.className = 'am-pdf-escenario';
+    document.body.appendChild(escenario);
+
+    var totalPaginas = Math.ceil(bloques.length / PDF.porPagina);
+    var paginas = [];
+    for (var p = 0; p < totalPaginas; p++) {
+      var desde = p * PDF.porPagina;
+      var pagina = crearPaginaPDF(bloques.slice(desde, desde + PDF.porPagina), desde, p + 1, totalPaginas, bloques.length);
+      escenario.appendChild(pagina);
+      paginas.push(pagina);
+    }
+
+    var imagenes = Array.from(escenario.querySelectorAll('.am-pdf-interior img'));
+    var cargaImagenes = Promise.all(imagenes.map(function (img) {
+      return img.complete ? null : new Promise(function (ok) { img.onload = img.onerror = ok; });
+    }));
+
+    return Promise.all([document.fonts.ready, cargaImagenes]).then(function () {
+      escenario.querySelectorAll('.am-pdf-cuadro').forEach(function (cuadro) {
+        ajustarAlCuadro(cuadro.querySelector('.am-pdf-caja'), cuadro.querySelector('.am-pdf-interior'));
+      });
+      var pdf = new jspdf.jsPDF({ unit: 'mm', format: 'a4', orientation: 'landscape', compress: true });
+      // Las paginas se rasterizan una por una para mantener el uso de memoria bajo
+      return paginas.reduce(function (cadena, pagina, i) {
+        return cadena.then(function () {
+          return html2canvas(pagina, { scale: 2, backgroundColor: '#fdf9ef', useCORS: true, logging: false });
+        }).then(function (canvas) {
+          if (i > 0) pdf.addPage('a4', 'landscape');
+          pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, PDF.anchoMm, PDF.altoMm, undefined, 'FAST');
+        });
+      }, Promise.resolve()).then(function () { return pdf; });
+    }).finally(function () {
+      escenario.remove();
+    });
+  }
+
+  document.getElementById('am_exportar').addEventListener('click', function () {
+    var bloques = AM.cargar();
+    if (!bloques.length) return;
+    if (!botonGuardarOrden.disabled) {
+      AM.aviso('Hay cambios de orden sin guardar. Presione "Guardar orden" para que la exportación los incluya.', null, true);
+      return;
+    }
+    if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
+      AM.aviso('No se pudo cargar el generador de PDF. Revise la conexión a internet.', null, true);
+      return;
+    }
+    var boton = this;
+    var texto = document.getElementById('am_exportar_texto');
+    boton.disabled = true;
+    texto.textContent = 'Generando…';
+    var velo = document.createElement('div');
+    velo.className = 'vw-modal-scrim vw-modal-abierta am-pdf-velo';
+    velo.innerHTML = '<div class="vw-toast vw-toast-visible am-pdf-progreso"><span class="material-symbols-outlined vw-ico-18">hourglass_top</span><span>Generando PDF…</span></div>';
+    document.body.appendChild(velo);
+
+    exportarPDF(bloques).then(function (pdf) {
+      pdf.save('analisis-manual-' + AM.formatearFecha(new Date().toISOString()).slice(0, 10) + '.pdf');
+      AM.aviso('PDF exportado.');
+    }).catch(function () {
+      AM.aviso('No se pudo generar el PDF.', null, true);
+    }).then(function () {
+      velo.remove();
+      boton.disabled = false;
+      texto.textContent = 'Exportar';
+    });
+  });
+
+  pintarBloques();
+</script>
+</body>
+</html>
